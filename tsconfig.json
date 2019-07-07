@@ -18,6 +18,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "np-time-picker": [
+        "dist/np-time-picker"
+      ],
+      "np-time-picker/*": [
+        "dist/np-time-picker/*"
+      ]
+    }
   }
 }

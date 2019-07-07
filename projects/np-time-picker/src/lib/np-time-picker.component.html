@@ -1,0 +1,60 @@
+<div class="np-timepicker-main">
+    <div>
+        <div>
+            <input class="np-timepicker-text" type="text" [ngModel]="value" (click)="_toggleTimePicker()" (blur)="_onChangeTime()">
+            <button type="button" class="np-timepicker-button" (click)="_toggleTimePicker()">
+                <i [class]="iconClass ? iconClass : 'np-timepicker-icon' "></i>
+            </button>
+        </div>
+    </div>
+    <div class="np-timepicker-div" *ngIf="_isOpen">
+        <table>
+            <tr>
+                <td>HH</td>
+                <td>MM</td>
+                <td>SS</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><button type="button" (click)="_minusHour()">-</button></td>
+                <td><button type="button" (click)="_minusMinute()">-</button></td>
+                <td><button type="button" (click)="_minusSecond()">-</button></td>
+            </tr>
+            <tr>
+                <td>
+                    <select (change)="_changeTime($event, 'hour')">
+                        <option *ngFor="let hour of _hours" value="{{hour}}" [selected]="hour == _selectedHour">{{hour}}
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <select (change)="_changeTime($event, 'minute')">
+                        <option *ngFor="let minute of _minutes" value="{{minute}}"
+                            [selected]="minute == _selectedMinute">{{minute}}
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <select (change)="_changeTime($event, 'second')">
+                        <option *ngFor="let second of _seconds" value="{{second}}"
+                            [selected]="second == _selectedSecond">{{second}}
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <select (change)="_changeTime($event, 'AMPM')">
+                        <option value="AM" [selected]="'AM' == _selectedAMPM">AM</option>
+                        <option value="PM" [selected]="'PM' == _selectedAMPM">PM</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><button type="button" (click)="_addHour()">+</button></td>
+                <td><button type="button" (click)="_addMinute()">+</button></td>
+                <td><button type="button" (click)="_addSecond()">+</button></td>
+                <td></td>
+            </tr>
+        </table>
+        <div (click)="_close()" class="np-close-button" *ngIf="!defaultOpen">X</div>
+    </div>
+</div>

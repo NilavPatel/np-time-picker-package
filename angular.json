@@ -115,6 +115,41 @@
           }
         }
       }
+    },
+    "np-time-picker": {
+      "projectType": "library",
+      "root": "projects/np-time-picker",
+      "sourceRoot": "projects/np-time-picker/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/np-time-picker/tsconfig.lib.json",
+            "project": "projects/np-time-picker/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/np-time-picker/src/test.ts",
+            "tsConfig": "projects/np-time-picker/tsconfig.spec.json",
+            "karmaConfig": "projects/np-time-picker/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/np-time-picker/tsconfig.lib.json",
+              "projects/np-time-picker/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }},
   "defaultProject": "np-time-picker-package"
 }
