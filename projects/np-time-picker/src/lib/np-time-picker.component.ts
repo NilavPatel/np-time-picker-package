@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'np-time-picker',
@@ -20,6 +20,8 @@ export class NpTimePickerComponent implements OnInit {
   _selectedAMPM = 'AM';
 
   @Input() value: string;
+  @Input() iconClass: string;
+  @Output() onChange: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
@@ -55,8 +57,7 @@ export class NpTimePickerComponent implements OnInit {
     this._setTime();
   }
 
-  _addHour() {
-    debugger;
+  _addHour() {    
     this._selectedHour = this._selectedHour == 12 ? 0 : this._selectedHour + 1;
     this._setTime();
   }
@@ -106,5 +107,6 @@ export class NpTimePickerComponent implements OnInit {
     this._selectedHour = parseInt(timeArray[0]);
     this._selectedMinute = parseInt(timeArray[1]);
     this._selectedSecond = parseInt(timeArray[2]);
-  }
+    this.onChange.emit(this.value);
+  }  
 }

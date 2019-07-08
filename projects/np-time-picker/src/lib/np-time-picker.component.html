@@ -1,13 +1,14 @@
-<div class="np-timepicker-main">
+<div class="np-component-main">
     <div>
         <div>
-            <input class="np-timepicker-text" type="text" [ngModel]="value" (click)="_toggleTimePicker()" (blur)="_onChangeTime()">
-            <button type="button" class="np-timepicker-button" (click)="_toggleTimePicker()">
+            <input class="np-component-input" type="text" [(ngModel)]="value" (click)="_toggleTimePicker()"
+                (change)="_onChangeTime()" pattern="(([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}) ([AaPp][Mm]))">
+            <button type="button" class="np-component-button" (click)="_toggleTimePicker()">
                 <i [class]="iconClass ? iconClass : 'np-timepicker-icon' "></i>
             </button>
         </div>
     </div>
-    <div class="np-timepicker-div" *ngIf="_isOpen">
+    <div class="np-component-div" *ngIf="_isOpen">
         <table>
             <tr>
                 <td>HH</td>
