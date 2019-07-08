@@ -22,6 +22,7 @@ export class NpTimePickerComponent implements OnInit {
   @Input() value: string;
   @Input() iconClass: string;
   @Output() onChange: EventEmitter<any> = new EventEmitter();
+  @Input() disabled: boolean;
 
   constructor() { }
 

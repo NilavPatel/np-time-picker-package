@@ -2,8 +2,8 @@
     <div>
         <div>
             <input class="np-component-input" type="text" [(ngModel)]="value" (click)="_toggleTimePicker()"
-                (change)="_onChangeTime()" pattern="(([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}) ([AaPp][Mm]))">
-            <button type="button" class="np-component-button" (click)="_toggleTimePicker()">
+                (change)="_onChangeTime()" pattern="(([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}) ([AaPp][Mm]))" [disabled]="disabled">
+            <button type="button" class="np-component-button" (click)="_toggleTimePicker()" [disabled]="disabled">
                 <i [class]="iconClass ? iconClass : 'np-timepicker-icon' "></i>
             </button>
         </div>

@@ -11,6 +11,9 @@ Angular 8 time-picker component
 
 2.  iconClass
     class to show icon
+
+3.  disabled
+    true/false - set component disabled
 ````
 
 
