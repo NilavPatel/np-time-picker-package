@@ -36,4 +36,5 @@
 
 .np-open-component{
     position: relative;
+    z-index: auto;
 }

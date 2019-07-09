@@ -33,7 +33,9 @@ export class NpTimePickerComponent implements OnInit {
     if (changes.value != undefined && changes.value.currentValue != this._value) {
       this._value = changes.value.currentValue;
       this._extractValues();
-      this.onChange.emit(this._value);
+      if (this.onChange != undefined) {
+        this.onChange.emit(this._value);
+      }
     }
   }
 
@@ -98,7 +100,9 @@ export class NpTimePickerComponent implements OnInit {
     this._value = this._selectedHour + ":" + this._selectedMinute + ":" + this._selectedSecond + " " + this._selectedAMPM;
     this.value = this._value;
     this.valueChange.emit(this._value);
-    this.onChange.emit(this._value);
+    if (this.onChange != undefined) {
+      this.onChange.emit(this._value);
+    }
   }
 
   _toggleTimePicker() {
@@ -116,7 +120,9 @@ export class NpTimePickerComponent implements OnInit {
     this._extractValues();
     this.value = this._value;
     this.valueChange.emit(this._value);
-    this.onChange.emit(this._value);
+    if (this.onChange != undefined) {
+      this.onChange.emit(this._value);
+    }
   }
 
   _extractValues() {
