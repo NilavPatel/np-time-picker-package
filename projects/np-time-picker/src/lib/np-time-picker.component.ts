@@ -3,7 +3,7 @@ import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@
 @Component({
   selector: 'np-time-picker',
   templateUrl: 'np-time-picker.component.html',
-  styleUrls: ['np-time-picker.component.css'],
+  styleUrls: ['np-time-picker.component.css','./css/np-font-package.css'],
   styles: []
 })
 export class NpTimePickerComponent implements OnInit {
