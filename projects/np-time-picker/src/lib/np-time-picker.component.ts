@@ -33,7 +33,7 @@ export class NpTimePickerComponent implements OnInit {
     if (changes.value != undefined && changes.value.currentValue != this._value) {
       this._value = changes.value.currentValue;
       this._extractValues();
-      if (this.onChange != undefined) {
+      if (this.onChange != undefined && !changes.value.firstChange) {
         this.onChange.emit(this._value);
       }
     }
