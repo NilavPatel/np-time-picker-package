@@ -1,10 +1,21 @@
 <form>
     <div class="row">
         <div class="col-md-4">
-            <np-time-picker></np-time-picker>
+            <np-time-picker [(value)]="timePicker"></np-time-picker>
+            <div>{{timePicker}}</div>
         </div>
         <div class="col-md-4">
-            <np-time-picker [value]="currentTime" [iconClass]="'fa fa-clock-o'"></np-time-picker>
+            <np-time-picker [(value)]="timePicker2" [iconClass]="'fa fa-clock-o'"></np-time-picker>
+            <div>{{timePicker2}}</div>
+        </div>
+        <div class="col-md-4">
+            <np-time-picker [(value)]="timePicker3" [iconClass]="'fa fa-clock-o'" (onChange)="onChange($event)"></np-time-picker>
+            <div>{{timePicker3}}</div>
+            <button type="button" (click)="setTime()">Set 10:00:00 PM</button>
+        </div>
+        <div class="col-md-4">
+            <np-time-picker [(value)]="timePicker4" [defaultOpen]=true></np-time-picker>
+            <div>{{timePicker4}}</div>
         </div>
     </div>
 </form>

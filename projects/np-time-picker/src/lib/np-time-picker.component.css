@@ -33,3 +33,7 @@
 .np-component-main .ng-invalid {
     border: 1px solid red;
 }
+
+.np-open-component{
+    position: relative;
+}

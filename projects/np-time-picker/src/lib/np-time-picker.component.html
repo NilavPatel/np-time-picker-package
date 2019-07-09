@@ -1,14 +1,14 @@
 <div class="np-component-main">
-    <div>
+    <div class="np-input-group" *ngIf="!defaultOpen">
         <div>
-            <input class="np-component-input" type="text" [(ngModel)]="value" (click)="_toggleTimePicker()"
-                (change)="_onChangeTime()" pattern="(([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}) ([AaPp][Mm]))" [disabled]="disabled">
+            <input class="np-component-input" type="text" [(ngModel)]="_value" (click)="_toggleTimePicker()"
+                (change)="_onInputChange()" pattern="(([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}) ([AaPp][Mm]))" [disabled]="disabled">
             <button type="button" class="np-component-button" (click)="_toggleTimePicker()" [disabled]="disabled">
                 <i [class]="iconClass ? iconClass : 'np-timepicker-icon' "></i>
             </button>
         </div>
     </div>
-    <div class="np-component-div" *ngIf="_isOpen">
+    <div class="np-component-div" *ngIf="_isOpen || defaultOpen" [ngClass]="{'np-open-component' : defaultOpen}">
         <table>
             <tr>
                 <td>HH</td>

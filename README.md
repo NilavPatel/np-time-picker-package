@@ -14,6 +14,10 @@ Angular 8 time-picker component
 
 3.  disabled
     true/false - set component disabled
+
+4.  defaultOpen
+    true/false
+    default open or not.
 ````
 
 
