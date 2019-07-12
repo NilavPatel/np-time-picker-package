@@ -3,12 +3,10 @@
     display: inline-block;
 }
 
-.np-component-input {
-    padding-right: 25px;
-}
-
 .np-component-button {
+    width: 25px;
     display: inline-block;
+    height: 20px;
 }
 
 .np-component-div {

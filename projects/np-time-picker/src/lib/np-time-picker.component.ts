@@ -3,17 +3,15 @@ import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@
 @Component({
   selector: 'np-time-picker',
   templateUrl: 'np-time-picker.component.html',
-  styleUrls: ['np-time-picker.component.css','./css/np-font-package.css'],
+  styleUrls: ['np-time-picker.component.css'],
   styles: []
 })
 export class NpTimePickerComponent implements OnInit {
 
   _isOpen = false;
-  
   _hours: number[] = [];
   _minutes: number[] = [];
   _seconds: number[] = [];
-
   _selectedHour: number = 0;
   _selectedMinute: number = 0;
   _selectedSecond: number = 0;
@@ -22,14 +20,14 @@ export class NpTimePickerComponent implements OnInit {
 
   @Input() value: string;
   @Output() valueChange = new EventEmitter();
-  @Input() defaultOpen :boolean;
+  @Input() defaultOpen: boolean;
   @Input() iconClass: string;
   @Output() onChange: EventEmitter<any> = new EventEmitter();
   @Input() disabled: boolean;
 
   constructor() { }
 
-  ngOnChanges(changes: SimpleChanges) {    
+  ngOnChanges(changes: SimpleChanges) {
     if (changes.value != undefined && changes.value.currentValue != this._value) {
       this._value = changes.value.currentValue;
       this._extractValues();
@@ -106,7 +104,7 @@ export class NpTimePickerComponent implements OnInit {
   }
 
   _toggleTimePicker() {
-    if(this.defaultOpen){
+    if (this.defaultOpen) {
       return;
     }
     this._isOpen = !this._isOpen;
@@ -126,7 +124,7 @@ export class NpTimePickerComponent implements OnInit {
   }
 
   _extractValues() {
-    if(this._value == undefined){
+    if (this._value == undefined) {
       return;
     }
     var result = this._value.split(" ");

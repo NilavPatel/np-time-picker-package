@@ -5,7 +5,7 @@
                 (change)="_onInputChange()" pattern="(([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}) ([AaPp][Mm]))"
                 [disabled]="disabled">
             <button type="button" class="np-component-button" (click)="_toggleTimePicker()" [disabled]="disabled">
-                <i [class]="iconClass ? iconClass : 'np-icon icon-clock' "></i>
+                <i [class]="iconClass"></i>
             </button>
         </div>
     </div>
@@ -18,9 +18,9 @@
                 <td></td>
             </tr>
             <tr>
-                <td><button type="button" (click)="_minusHour()"><i class="np-icon icon-minus"></i></button></td>
-                <td><button type="button" (click)="_minusMinute()"><i class="np-icon icon-minus"></i></button></td>
-                <td><button type="button" (click)="_minusSecond()"><i class="np-icon icon-minus"></i></button></td>
+                <td><button type="button" (click)="_minusHour()">-</button></td>
+                <td><button type="button" (click)="_minusMinute()">-</button></td>
+                <td><button type="button" (click)="_minusSecond()">-</button></td>
             </tr>
             <tr>
                 <td>
@@ -51,12 +51,12 @@
                 </td>
             </tr>
             <tr>
-                <td><button type="button" (click)="_addHour()"><i class="np-icon icon-plus"></i></button></td>
-                <td><button type="button" (click)="_addMinute()"><i class="np-icon icon-plus"></i></button></td>
-                <td><button type="button" (click)="_addSecond()"><i class="np-icon icon-plus"></i></button></td>
+                <td><button type="button" (click)="_addHour()">+</button></td>
+                <td><button type="button" (click)="_addMinute()">+</button></td>
+                <td><button type="button" (click)="_addSecond()">+</button></td>
                 <td></td>
             </tr>
         </table>
-        <div (click)="_close()" class="np-close-button" *ngIf="!defaultOpen"><i class="np-icon icon-close"></i></div>
+        <div (click)="_close()" class="np-close-button" *ngIf="!defaultOpen">X</div>
     </div>
 </div>
