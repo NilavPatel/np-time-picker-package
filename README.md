@@ -1,5 +1,7 @@
 # time picker component
 
+![image login](https://github.com/NilavPatel/np-time-picker-package/blob/master/src/assets/images/image1.PNG)
+
 ````
 Angular 8 time-picker component
 ````
