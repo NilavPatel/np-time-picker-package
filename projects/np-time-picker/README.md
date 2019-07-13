@@ -5,6 +5,10 @@ Angular 8 time-picker component
 Example is given in git repository.
 ````
 
+````
+<np-time-picker [(value)]="timePicker"></np-time-picker>
+````
+
 # properties
 ````
 1.  value
