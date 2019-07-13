@@ -2,7 +2,7 @@
 
 ````
 Angular 8 time-picker component
-Example is given in git repository.
+Example is given in github repository.
 ````
 
 ````

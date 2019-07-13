@@ -5,7 +5,7 @@ Angular 8 time-picker component
 ````
 
 ````
-npm i np-time-picker
+npm i np-ui-time-picker
 ````
 
 ````
