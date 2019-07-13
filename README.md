@@ -4,6 +4,10 @@
 Angular 8 time-picker component
 ````
 
+````
+npm i np-time-picker
+````
+
 # properties
 ````
 1.  value
