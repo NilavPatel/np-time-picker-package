@@ -1,15 +1,14 @@
 <div class="np-component-main">
     <div class="np-input-group" *ngIf="!defaultOpen">
         <div>
-            <input class="np-component-input" type="text" [(ngModel)]="_value" (click)="_toggleTimePicker()"
-                (change)="_onInputChange()" pattern="(([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}) ([AaPp][Mm]))"
-                [disabled]="disabled">
+            <input class="np-component-input" type="text" [(ngModel)]="_value" (click)="_toggleTimePicker()" (change)="_onInputChange()" pattern="(([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}) ([AaPp][Mm]))" [disabled]="disabled">
             <button type="button" class="np-component-button" (click)="_toggleTimePicker()" [disabled]="disabled">
-                <i [class]="iconClass"></i>
+                <i class="demo-icon icon-clock"></i>
             </button>
         </div>
     </div>
     <div class="np-component-div" *ngIf="_isOpen || defaultOpen" [ngClass]="{'np-open-component' : defaultOpen}">
+        <div (click)="_close()" class="np-close-button" *ngIf="!defaultOpen"><i class="demo-icon icon-cancel"></i></div>
         <table>
             <tr>
                 <td>HH</td>
@@ -18,9 +17,9 @@
                 <td></td>
             </tr>
             <tr>
-                <td><button type="button" (click)="_minusHour()">-</button></td>
-                <td><button type="button" (click)="_minusMinute()">-</button></td>
-                <td><button type="button" (click)="_minusSecond()">-</button></td>
+                <td><button type="button" (click)="_minusHour()"><i class="demo-icon icon-up"></i></button></td>
+                <td><button type="button" (click)="_minusMinute()"><i class="demo-icon icon-up"></i></button></td>
+                <td><button type="button" (click)="_minusSecond()"><i class="demo-icon icon-up"></i></button></td>
             </tr>
             <tr>
                 <td>
@@ -51,12 +50,11 @@
                 </td>
             </tr>
             <tr>
-                <td><button type="button" (click)="_addHour()">+</button></td>
-                <td><button type="button" (click)="_addMinute()">+</button></td>
-                <td><button type="button" (click)="_addSecond()">+</button></td>
+                <td><button type="button" (click)="_addHour()"><i class="demo-icon icon-down"></i></button></td>
+                <td><button type="button" (click)="_addMinute()"><i class="demo-icon icon-down"></i></button></td>
+                <td><button type="button" (click)="_addSecond()"><i class="demo-icon icon-down"></i></button></td>
                 <td></td>
             </tr>
         </table>
-        <div (click)="_close()" class="np-close-button" *ngIf="!defaultOpen">X</div>
     </div>
 </div>
