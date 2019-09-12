@@ -1,20 +1,21 @@
 <div class="np-component-main">
     <div class="np-input-group" *ngIf="!defaultOpen">
         <div>
-            <input class="np-component-input" type="text" [(ngModel)]="_value" (click)="_toggleTimePicker()" (change)="_onInputChange()" pattern="(([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}) ([AaPp][Mm]))" [disabled]="disabled">
+            <input class="np-component-input" type="text" [(ngModel)]="_value" (click)="_toggleTimePicker()"
+                (change)="_onInputChange()" pattern="(([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}) ([AaPp][Mm]))"
+                [disabled]="disabled">
             <button type="button" class="np-component-button" (click)="_toggleTimePicker()" [disabled]="disabled">
                 <i class="demo-icon icon-clock"></i>
             </button>
         </div>
     </div>
     <div class="np-component-div" *ngIf="_isOpen || defaultOpen" [ngClass]="{'np-open-component' : defaultOpen}">
-        <div (click)="_close()" class="np-close-button" *ngIf="!defaultOpen"><i class="demo-icon icon-cancel"></i></div>
         <table>
             <tr>
-                <td>HH</td>
-                <td>MM</td>
-                <td>SS</td>
-                <td></td>
+                <th>HH</th>
+                <th>MM</th>
+                <th>SS</th>
+                <th *ngIf="is24Hours == false"></th>
             </tr>
             <tr>
                 <td><button type="button" (click)="_minusHour()"><i class="demo-icon icon-up"></i></button></td>
@@ -42,7 +43,7 @@
                         </option>
                     </select>
                 </td>
-                <td>
+                <td *ngIf="is24Hours == false">
                     <select (change)="_changeTime($event, 'AMPM')">
                         <option value="AM" [selected]="'AM' == _selectedAMPM">AM</option>
                         <option value="PM" [selected]="'PM' == _selectedAMPM">PM</option>

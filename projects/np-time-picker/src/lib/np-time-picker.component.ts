@@ -1,10 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, HostListener, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'np-time-picker',
   templateUrl: 'np-time-picker.component.html',
-  styleUrls: ['np-time-picker.component.css'],
-  styles: []
+  styleUrls: ['np-time-picker.component.css']
 })
 export class NpTimePickerComponent implements OnInit {
 
@@ -24,8 +23,20 @@ export class NpTimePickerComponent implements OnInit {
   @Input() iconClass: string;
   @Output() onChange: EventEmitter<any> = new EventEmitter();
   @Input() disabled: boolean;
+  @Input() is24Hours: boolean;
 
-  constructor() { }
+  constructor(private eRef: ElementRef) {
+    if (this.is24Hours == undefined) {
+      this.is24Hours = false;
+    }
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickOutSide(event: any) {
+    if (!this.eRef.nativeElement.contains(event.target)) {
+      this._close();
+    }
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.value != undefined && changes.value.currentValue != this._value) {
@@ -38,47 +49,60 @@ export class NpTimePickerComponent implements OnInit {
   }
 
   ngOnInit() {
-    for (var i = 0; i <= 12; i++) {
+    var start = this.is24Hours == true ? 24 : 12;
+    for (var i = 0; i < start; i++) {
       this._hours.push(i);
     }
 
-    for (var i = 0; i <= 60; i++) {
+    for (var i = 0; i < 60; i++) {
       this._minutes.push(i);
       this._seconds.push(i);
     }
   }
 
   _minusHour() {
-    this._selectedHour = this._selectedHour == 0 ? 12 : this._selectedHour - 1;
+    this._selectedHour = this._selectedHour == 0 ? (this.is24Hours ? 23 : 11) : this._selectedHour - 1;
     this._setValue();
   }
 
   _minusMinute() {
-    this._selectedMinute = this._selectedMinute == 0 ? 60 : this._selectedMinute - 1;
+    this._selectedMinute = this._selectedMinute == 0 ? 59 : this._selectedMinute - 1;
+    if (this._selectedMinute == 59) {
+      this._selectedHour = this._selectedHour == 0 ? (this.is24Hours ? 23 : 11) : this._selectedHour - 1;
+    }
     this._setValue();
   }
 
   _minusSecond() {
-    this._selectedSecond = this._selectedSecond == 0 ? 60 : this._selectedSecond - 1;
+    this._selectedSecond = this._selectedSecond == 0 ? 59 : this._selectedSecond - 1;
+    if (this._selectedSecond == 59) {
+      this._selectedMinute = this._selectedMinute == 0 ? 59 : this._selectedMinute - 1;
+    }
     this._setValue();
   }
 
   _addHour() {
-    this._selectedHour = this._selectedHour == 12 ? 0 : this._selectedHour + 1;
+    this._selectedHour = this._selectedHour == (this.is24Hours ? 23 : 11) ? 0 : this._selectedHour + 1;
     this._setValue();
   }
 
   _addMinute() {
-    this._selectedMinute = this._selectedMinute == 60 ? 0 : this._selectedMinute + 1;
+    this._selectedMinute = this._selectedMinute == 59 ? 0 : this._selectedMinute + 1;
+    if (this._selectedMinute == 0) {
+      this._selectedHour = this._selectedHour == (this.is24Hours ? 23 : 11) ? 0 : this._selectedHour + 1;
+    }
     this._setValue();
   }
 
   _addSecond() {
-    this._selectedSecond = this._selectedSecond == 60 ? 0 : this._selectedSecond + 1;
+    this._selectedSecond = this._selectedSecond == 59 ? 0 : this._selectedSecond + 1;
+    if (this._selectedSecond == 0) {
+      this._selectedMinute = this._selectedMinute == 59 ? 0 : this._selectedMinute + 1;
+    }
     this._setValue();
   }
 
-  _changeTime($event, arg: string) {
+  _changeTime($event: any, arg: string) {
     if (arg == "hour") {
       this._selectedHour = parseInt($event.target.value);
     }
@@ -95,12 +119,41 @@ export class NpTimePickerComponent implements OnInit {
   }
 
   _setValue() {
-    this._value = this._selectedHour + ":" + this._selectedMinute + ":" + this._selectedSecond + " " + this._selectedAMPM;
+    if (this.is24Hours) {
+      var time = this._selectedHour + ":" + this._selectedMinute + ":" + this._selectedSecond;
+      this._value = this.timeConvert24to12(time);
+    } else {
+      this._value = this._selectedHour + ":" + this._selectedMinute + ":" + this._selectedSecond + " " + this._selectedAMPM;
+    }
     this.value = this._value;
     this.valueChange.emit(this._value);
     if (this.onChange != undefined) {
       this.onChange.emit(this._value);
     }
+  }
+
+  private timeConvert12to24(time: string) {
+    var PM: boolean = time.match('PM') ? true : false;
+    var timeArray: string[] = time.split(':');
+    var min: string = timeArray[1];
+    var hour: string;
+    var sec: string;
+    if (PM) {
+      hour = (12 + parseInt(timeArray[0], 10)).toString();
+      sec = timeArray[2].replace('PM', '');
+    } else {
+      hour = timeArray[0];
+      sec = timeArray[2].replace('AM', '');
+    }
+    return hour + ':' + min + ':' + sec;
+  }
+
+  private timeConvert24to12(time: string) {
+    var values = time.split(":");
+    var hour24 = parseInt(values[0]);
+    var hour12 = hour24 % 12 || 12;
+    var ampm = (hour24 < 12 || hour24 === 24) ? "AM" : "PM";
+    return hour12 + ":" + values[1] + ":" + values[2] + " " + ampm;
   }
 
   _toggleTimePicker() {
@@ -127,11 +180,33 @@ export class NpTimePickerComponent implements OnInit {
     if (this._value == undefined) {
       return;
     }
-    var result = this._value.split(" ");
-    this._selectedAMPM = result[1] == "am" || result[1] == "AM" ? "AM" : "PM";
-    var timeArray = result[0].split(":");
-    this._selectedHour = parseInt(timeArray[0]);
-    this._selectedMinute = parseInt(timeArray[1]);
-    this._selectedSecond = parseInt(timeArray[2]);
+    if (this.is24Hours == true) {
+      var result24 = this.timeConvert12to24(this._value);
+      var timeArray = result24.split(":");
+      this._selectedHour = parseInt(timeArray[0]);
+      this._selectedMinute = parseInt(timeArray[1]);
+      this._selectedSecond = parseInt(timeArray[2]);
+    } else {
+      var result = this._value.split(" ");
+      this._selectedAMPM = result[1] == "am" || result[1] == "AM" ? "AM" : "PM";
+      var timeArray = result[0].split(":");
+      this._selectedHour = parseInt(timeArray[0]);
+      this._selectedMinute = parseInt(timeArray[1]);
+      this._selectedSecond = parseInt(timeArray[2]);
+    }
+  }
+
+  get24hrsTimeFormat() {
+    if (this.is24Hours) {
+      return this._value;
+    }
+    return this.timeConvert12to24(this._value);
+  }
+
+  get12hrsTimeFormat() {
+    if (this.is24Hours) {
+      return this.timeConvert24to12(this._value);
+    }
+    return this._value;
   }
 }
