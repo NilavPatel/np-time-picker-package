@@ -25,7 +25,7 @@ export class NpTimePickerComponent implements OnInit {
   @Input() disabled: boolean;
   @Input() is24Hours: boolean;
 
-  constructor(private eRef: ElementRef) {
+  constructor(private elRef: ElementRef) {
     if (this.is24Hours == undefined) {
       this.is24Hours = false;
     }
@@ -33,7 +33,7 @@ export class NpTimePickerComponent implements OnInit {
 
   @HostListener('document:click', ['$event'])
   clickOutSide(event: any) {
-    if (!this.eRef.nativeElement.contains(event.target)) {
+    if (!this.elRef.nativeElement.contains(event.target)) {
       this._close();
     }
   }
@@ -164,6 +164,9 @@ export class NpTimePickerComponent implements OnInit {
   }
 
   _close() {
+    if (this.defaultOpen == true) {
+      return;
+    }
     this._isOpen = false;
   }
 

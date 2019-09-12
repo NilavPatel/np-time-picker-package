@@ -5,6 +5,7 @@
     "author": {
         "name": "nilavpatel"
     },
+    "license": "MIT",
     "keywords": [
         "angular",
         "timepicker",
