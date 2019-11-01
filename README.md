@@ -6,7 +6,7 @@
 Angular 8 time-picker component
 ````
 
-### [Demo](https://stackblitz.com/edit/np-ui-time-picker)
+## [Demo](https://stackblitz.com/edit/np-ui-time-picker)
 
 ````
 npm i np-ui-time-picker
@@ -16,7 +16,7 @@ npm i np-ui-time-picker
 <np-time-picker [(value)]="timePicker"></np-time-picker>
 ````
 
-# properties
+## Properties
 ````
 1.  value
     string value for time. in hh:mm:ss tt format
@@ -34,14 +34,14 @@ npm i np-ui-time-picker
     Return type will be 12 hours format always.
 ````
 
-# methods
+## Methods
 ````
 1.  onChange( newValue : string)
     value change event, fired when time value is changed.
     in parameter new value will be parsed.
 ````
 
-# Apis
+## Apis
 ````
 1.  get24hrsTimeFormat()
     return 24 hrs formatted time value
