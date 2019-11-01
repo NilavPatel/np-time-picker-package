@@ -1,8 +1,6 @@
-# time picker component
+# np-ui-time-picker
 
-<img src="https://raw.githubusercontent.com/NilavPatel/np-time-picker-package/master/src/assets/images/logo-large.png" width="300" height="80">
-
-![image login](https://raw.githubusercontent.com/NilavPatel/np-time-picker-package/master/src/assets/images/image1.PNG)
+<img src="https://raw.githubusercontent.com/NilavPatel/np-ui-data-grid-package/master/src/assets/images/logo-large.png" width="300" height="80">
 
 ````
 Angular 8 time-picker component
