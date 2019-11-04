@@ -16,7 +16,7 @@ npm i np-ui-time-picker
 <np-time-picker [(value)]="timePicker"></np-time-picker>
 ````
 
-## Properties
+### Properties
 ````
 1.  value
     string value for time. in hh:mm:ss tt format
@@ -34,14 +34,14 @@ npm i np-ui-time-picker
     Return type will be 12 hours format always.
 ````
 
-## Methods
+### Methods
 ````
 1.  onChange( newValue : string)
     value change event, fired when time value is changed.
     in parameter new value will be parsed.
 ````
 
-## Apis
+### Apis
 ````
 1.  get24hrsTimeFormat()
     return 24 hrs formatted time value
