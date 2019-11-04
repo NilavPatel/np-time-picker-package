@@ -34,13 +34,6 @@ npm i np-ui-time-picker
     Return type will be 12 hours format always.
 ````
 
-### Methods
-````
-1.  onChange( newValue : string)
-    value change event, fired when time value is changed.
-    in parameter new value will be parsed.
-````
-
 ### Apis
 ````
 1.  get24hrsTimeFormat()
@@ -48,4 +41,11 @@ npm i np-ui-time-picker
 
 2.  get12hrsTimeFormat()
     return 12 hrs formatted time value
+````
+
+### Methods
+````
+1.  onChange( newValue : string)
+    value change event, fired when time value is changed.
+    in parameter new value will be parsed.
 ````
