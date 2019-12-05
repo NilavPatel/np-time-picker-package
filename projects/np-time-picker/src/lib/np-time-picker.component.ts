@@ -16,18 +16,17 @@ export class NpTimePickerComponent implements OnInit {
   _selectedSecond: number = 0;
   _selectedAMPM = 'AM';
   _value: string;
+  _pattern: any = new RegExp("^(([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}) ([AaPp][Mm]))$");
 
   @Input() value: string;
   @Output() valueChange = new EventEmitter();
-  @Input() defaultOpen: boolean;  
+  @Input() defaultOpen: boolean;
   @Output() onChange: EventEmitter<any> = new EventEmitter();
   @Input() disabled: boolean;
   @Input() is24Hours: boolean;
 
   constructor(private elRef: ElementRef) {
-    if (this.is24Hours == undefined) {
-      this.is24Hours = false;
-    }
+
   }
 
   @HostListener('document:click', ['$event'])
@@ -39,6 +38,15 @@ export class NpTimePickerComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.value != undefined && changes.value.currentValue != this._value) {
+      if (changes.value.currentValue == undefined || changes.value.currentValue == null || !this._pattern.test(changes.value.currentValue)) {
+        this._value = null;
+        this.value = null;
+        this.valueChange.emit(this.value);
+        if (this.onChange != undefined) {
+          this.onChange.emit(this.value);
+        }
+        return;
+      }
       this._value = changes.value.currentValue;
       this._extractValues();
       if (this.onChange != undefined && !changes.value.firstChange) {
@@ -48,6 +56,13 @@ export class NpTimePickerComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.is24Hours == undefined) {
+      this.is24Hours = false;
+    }
+    if (this.is24Hours) {
+      this._pattern = new RegExp("^([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2})$");
+    }
+
     var start = this.is24Hours == true ? 24 : 12;
     for (var i = 0; i < start; i++) {
       this._hours.push(i);
@@ -84,11 +99,17 @@ export class NpTimePickerComponent implements OnInit {
   }
 
   _addHour() {
+    if (this._selectedHour > (this.is24Hours ? 23 : 11)) {
+      this._selectedHour = (this.is24Hours ? 23 : 11);
+    }
     this._selectedHour = this._selectedHour == (this.is24Hours ? 23 : 11) ? 0 : this._selectedHour + 1;
     this._setValue();
   }
 
   _addMinute() {
+    if (this._selectedMinute > 59) {
+      this._selectedMinute = 59;
+    }
     this._selectedMinute = this._selectedMinute == 59 ? 0 : this._selectedMinute + 1;
     if (this._selectedMinute == 0) {
       this._selectedHour = this._selectedHour == (this.is24Hours ? 23 : 11) ? 0 : this._selectedHour + 1;
@@ -97,6 +118,9 @@ export class NpTimePickerComponent implements OnInit {
   }
 
   _addSecond() {
+    if (this._selectedSecond > 59) {
+      this._selectedSecond = 59;
+    }
     this._selectedSecond = this._selectedSecond == 59 ? 0 : this._selectedSecond + 1;
     if (this._selectedSecond == 0) {
       this._selectedMinute = this._selectedMinute == 59 ? 0 : this._selectedMinute + 1;
@@ -125,8 +149,7 @@ export class NpTimePickerComponent implements OnInit {
 
   _setValue() {
     if (this.is24Hours) {
-      var time = this._selectedHour + ":" + this._selectedMinute + ":" + this._selectedSecond;
-      this._value = this.timeConvert24to12(time);
+      this._value = this._selectedHour + ":" + this._selectedMinute + ":" + this._selectedSecond;
     } else {
       this._value = this._selectedHour + ":" + this._selectedMinute + ":" + this._selectedSecond + " " + this._selectedAMPM;
     }
@@ -176,6 +199,15 @@ export class NpTimePickerComponent implements OnInit {
   }
 
   _onInputChange() {
+    if (this._value == undefined || this._value == null || !this._pattern.test(this._value)) {
+      this._value = null;
+      this.value = null;
+      this.valueChange.emit(this.value);
+      if (this.onChange != undefined) {
+        this.onChange.emit(this.value);
+      }
+      return;
+    }
     this._extractValues();
     this.value = this._value;
     this.valueChange.emit(this._value);
@@ -185,7 +217,7 @@ export class NpTimePickerComponent implements OnInit {
   }
 
   _extractValues() {
-    if (this._value == undefined) {
+    if (this._value == undefined || this._value == null || !this._pattern.test(this._value)) {
       return;
     }
     if (this.is24Hours == true) {
@@ -202,19 +234,36 @@ export class NpTimePickerComponent implements OnInit {
       this._selectedMinute = parseInt(timeArray[1]);
       this._selectedSecond = parseInt(timeArray[2]);
     }
+
+    var isChanged = false;
+    if (this._selectedHour > (this.is24Hours ? 23 : 11)) {
+      isChanged = true;
+      this._selectedHour = (this.is24Hours ? 23 : 11);
+    }
+    if (this._selectedMinute > 59) {
+      isChanged = true;
+      this._selectedMinute = 59;
+    }
+    if (this._selectedSecond > 59) {
+      isChanged = true;
+      this._selectedSecond = 59;
+    }
+    if (isChanged) {
+      this._setValue();
+    }
   }
 
   get24hrsTimeFormat() {
     if (this.is24Hours) {
-      return this._value;
+      return this.value;
     }
-    return this.timeConvert12to24(this._value);
+    return this.timeConvert12to24(this.value);
   }
 
   get12hrsTimeFormat() {
     if (this.is24Hours) {
-      return this.timeConvert24to12(this._value);
+      return this.timeConvert24to12(this.value);
     }
-    return this._value;
+    return this.value;
   }
 }

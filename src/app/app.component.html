@@ -14,7 +14,7 @@
             <button type="button" (click)="setTime()">Set 10:00:00 PM</button>
         </div>
         <div class="col-md-4">
-            <np-time-picker [(value)]="timePicker4" [defaultOpen]=true></np-time-picker>
+            <np-time-picker [(value)]="timePicker4" [is24Hours]=true [defaultOpen]=true></np-time-picker>
             <div>{{timePicker4}}</div>
         </div>
         <div class="col-md-4">
