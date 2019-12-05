@@ -19,8 +19,7 @@ export class NpTimePickerComponent implements OnInit {
 
   @Input() value: string;
   @Output() valueChange = new EventEmitter();
-  @Input() defaultOpen: boolean;
-  @Input() iconClass: string;
+  @Input() defaultOpen: boolean;  
   @Output() onChange: EventEmitter<any> = new EventEmitter();
   @Input() disabled: boolean;
   @Input() is24Hours: boolean;
@@ -77,6 +76,9 @@ export class NpTimePickerComponent implements OnInit {
     this._selectedSecond = this._selectedSecond == 0 ? 59 : this._selectedSecond - 1;
     if (this._selectedSecond == 59) {
       this._selectedMinute = this._selectedMinute == 0 ? 59 : this._selectedMinute - 1;
+      if (this._selectedMinute == 59) {
+        this._selectedHour = this._selectedHour == 0 ? (this.is24Hours ? 23 : 11) : this._selectedHour - 1;
+      }
     }
     this._setValue();
   }
@@ -98,6 +100,9 @@ export class NpTimePickerComponent implements OnInit {
     this._selectedSecond = this._selectedSecond == 59 ? 0 : this._selectedSecond + 1;
     if (this._selectedSecond == 0) {
       this._selectedMinute = this._selectedMinute == 59 ? 0 : this._selectedMinute + 1;
+      if (this._selectedMinute == 0) {
+        this._selectedHour = this._selectedHour == (this.is24Hours ? 23 : 11) ? 0 : this._selectedHour + 1;
+      }
     }
     this._setValue();
   }

@@ -47,6 +47,12 @@
     text-align: center;
 }
 
+.np-ui-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
 /*font css start*/
 
 @font-face {

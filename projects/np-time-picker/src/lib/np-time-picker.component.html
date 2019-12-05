@@ -12,15 +12,12 @@
     <div class="np-component-div" *ngIf="_isOpen || defaultOpen" [ngClass]="{'np-open-component' : defaultOpen}">
         <table>
             <tr>
-                <th>HH</th>
-                <th>MM</th>
-                <th>SS</th>
-                <th *ngIf="is24Hours == false"></th>
-            </tr>
-            <tr>
-                <td><button type="button" (click)="_minusHour()"><i class="demo-icon icon-up"></i></button></td>
-                <td><button type="button" (click)="_minusMinute()"><i class="demo-icon icon-up"></i></button></td>
-                <td><button type="button" (click)="_minusSecond()"><i class="demo-icon icon-up"></i></button></td>
+                <td><button class="np-ui-button" type="button" (click)="_minusHour()"><i
+                            class="demo-icon icon-up"></i></button></td>
+                <td><button class="np-ui-button" type="button" (click)="_minusMinute()"><i
+                            class="demo-icon icon-up"></i></button></td>
+                <td><button class="np-ui-button" type="button" (click)="_minusSecond()"><i
+                            class="demo-icon icon-up"></i></button></td>
             </tr>
             <tr>
                 <td>
@@ -51,9 +48,12 @@
                 </td>
             </tr>
             <tr>
-                <td><button type="button" (click)="_addHour()"><i class="demo-icon icon-down"></i></button></td>
-                <td><button type="button" (click)="_addMinute()"><i class="demo-icon icon-down"></i></button></td>
-                <td><button type="button" (click)="_addSecond()"><i class="demo-icon icon-down"></i></button></td>
+                <td><button class="np-ui-button" type="button" (click)="_addHour()"><i
+                            class="demo-icon icon-down"></i></button></td>
+                <td><button class="np-ui-button" type="button" (click)="_addMinute()"><i
+                            class="demo-icon icon-down"></i></button></td>
+                <td><button class="np-ui-button" type="button" (click)="_addSecond()"><i
+                            class="demo-icon icon-down"></i></button></td>
                 <td></td>
             </tr>
         </table>
