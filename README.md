@@ -12,26 +12,28 @@ Angular 8 time-picker component
 npm i np-ui-time-picker
 ````
 
+### HTML
 ````
 <np-time-picker [(value)]="timePicker"></np-time-picker>
 ````
 
 ### Properties
 ````
-1.  value
-    string value for time. in hh:mm:ss tt format
+1.  value : string
+    Two way data binding    
+    return value depends on time format, 
+    if 12 hrs then hh:mm:ss tt,
+    or if 24 hrs then HH:mm:ss.
 
-2.  disabled
+2.  disabled : boolean
     true/false - set component disabled
 
-3.  defaultOpen
-    true/false
-    default open or not.
+3.  defaultOpen : boolean
+    Set time picker default open or close.
 
 4.  is24Hours: boolean
     if set to true, display 24 hours format for time.
-    default it is set to false.
-    Return type will be 12 hours format always.
+    default value is false.    
 ````
 
 ### Apis
