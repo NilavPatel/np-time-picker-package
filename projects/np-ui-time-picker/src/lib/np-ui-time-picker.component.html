@@ -54,5 +54,8 @@
                 <td></td>
             </tr>
         </table>
+        <div *ngIf="isOkButton">
+            <button type="button" class="np-ok-button" (click)="_isOpen = !_isOpen">Ok</button>
+        </div>
     </div>
 </div>

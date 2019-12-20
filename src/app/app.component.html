@@ -1,25 +1,52 @@
-<form>
-    <div class="row">
-        <div class="col-md-4">
-            <np-time-picker [(value)]="timePicker"></np-time-picker>
-            <div>{{timePicker}}</div>
-        </div>
-        <div class="col-md-4">
-            <np-time-picker [(value)]="timePicker2"></np-time-picker>
-            <div>{{timePicker2}}</div>
-        </div>
-        <div class="col-md-4">
-            <np-time-picker [(value)]="timePicker3" (onChange)="onChange($event)"></np-time-picker>
-            <div>{{timePicker3}}</div>
-            <button type="button" (click)="setTime()">Set 10:00:00 PM</button>
-        </div>
-        <div class="col-md-4">
-            <np-time-picker [(value)]="timePicker4" [is24Hours]=true [defaultOpen]=true></np-time-picker>
-            <div>{{timePicker4}}</div>
-        </div>
-        <div class="col-md-4">
-            <np-time-picker [(value)]="timePicker4" [is24Hours]=true></np-time-picker>
-            <div>{{timePicker4}}</div>
-        </div>
-    </div>
-</form>
+<div>
+    <legend>1. Default Time picker</legend>
+    <fieldset>
+        <np-ui-time-picker [(value)]="timePicker"></np-ui-time-picker>
+        <div>Selected time is : {{timePicker}}</div>
+    </fieldset>
+</div>
+
+<div>
+    <legend>2. 24 hours format time picker</legend>
+    <fieldset>
+        <np-ui-time-picker [(value)]="timePicker2" [is24Hours]=true></np-ui-time-picker>
+        <div>Selected time is : {{timePicker2}}</div>
+    </fieldset>
+</div>
+
+<div>
+    <legend>3. Set time to time picker</legend>
+    <fieldset>
+        <np-ui-time-picker [(value)]="timePicker3"></np-ui-time-picker>
+        <button type="button" (click)="setTime()">Set 10:00:00 PM</button>
+    </fieldset>
+</div>
+
+<div>
+    <legend>4. OnChnage event of time picker</legend>
+    <fieldset>
+        <np-ui-time-picker [(value)]="timePicker4" (onChange)="onChange($event)"></np-ui-time-picker>
+    </fieldset>
+</div>
+
+<div>
+    <legend>5. Always open time picker</legend>
+    <fieldset>
+        <np-ui-time-picker [(value)]="timePicker5" [defaultOpen]="true"></np-ui-time-picker>
+    </fieldset>
+</div>
+
+<div>
+    <legend>6. Set disable/enable</legend>
+    <fieldset>
+        <np-ui-time-picker [(value)]="timePicker6" [disabled]="isDisable"></np-ui-time-picker>
+        <button (click)="isDisable = !isDisable">Toggle disable/enable</button>
+    </fieldset>
+</div>
+
+<div>
+    <legend>7. Show ok button</legend>
+    <fieldset>
+        <np-ui-time-picker [(value)]="timePicker7" [isOkButton]="true"></np-ui-time-picker>
+    </fieldset>
+</div>

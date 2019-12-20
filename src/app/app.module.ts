@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { NpTimePickerModule } from 'projects/np-time-picker/src/public-api';
+import { NpUiTimePickerModule } from 'projects/np-ui-time-picker/src/public-api';
 
 @NgModule({
   declarations: [
@@ -10,7 +10,7 @@ import { NpTimePickerModule } from 'projects/np-time-picker/src/public-api';
   ],
   imports: [
     BrowserModule,
-    NpTimePickerModule
+    NpUiTimePickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

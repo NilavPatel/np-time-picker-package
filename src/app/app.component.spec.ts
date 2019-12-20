@@ -16,16 +16,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'np-time-picker-package'`, () => {
+  it(`should have as title 'np-ui-time-picker-package'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('np-time-picker-package');
+    expect(app.title).toEqual('np-ui-time-picker-package');
   });
 
   it('should render title in a h1 tag', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to np-time-picker-package!');
+    expect(compiled.querySelector('h1').textContent).toContain('Welcome to np-ui-time-picker-package!');
   });
 });

@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, HostListener, ElementRef } from '@angular/core';
 
 @Component({
-  selector: 'np-time-picker',
-  templateUrl: 'np-time-picker.component.html',
-  styleUrls: ['np-time-picker.component.css']
+  selector: 'np-ui-time-picker',
+  templateUrl: 'np-ui-time-picker.component.html',
+  styleUrls: ['np-ui-time-picker.component.css']
 })
-export class NpTimePickerComponent implements OnInit {
+export class NpUiTimePickerComponent implements OnInit {
 
   _isOpen = false;
   _hours: number[] = [];
@@ -24,34 +24,15 @@ export class NpTimePickerComponent implements OnInit {
   @Output() onChange: EventEmitter<any> = new EventEmitter();
   @Input() disabled: boolean;
   @Input() is24Hours: boolean;
+  @Input() isOkButton: boolean;
 
   constructor(private elRef: ElementRef) {
-
   }
 
   @HostListener('document:click', ['$event'])
   clickOutSide(event: any) {
     if (!this.elRef.nativeElement.contains(event.target)) {
       this._close();
-    }
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes.value != undefined && changes.value.currentValue != this._value) {
-      if (changes.value.currentValue == undefined || changes.value.currentValue == null || !this._pattern.test(changes.value.currentValue)) {
-        this._value = null;
-        this.value = null;
-        this.valueChange.emit(this.value);
-        if (this.onChange != undefined) {
-          this.onChange.emit(this.value);
-        }
-        return;
-      }
-      this._value = changes.value.currentValue;
-      this._extractValues();
-      if (this.onChange != undefined && !changes.value.firstChange) {
-        this.onChange.emit(this._value);
-      }
     }
   }
 
@@ -71,6 +52,31 @@ export class NpTimePickerComponent implements OnInit {
     for (var i = 0; i < 60; i++) {
       this._minutes.push(i);
       this._seconds.push(i);
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.is24Hours == undefined) {
+      this.is24Hours = false;
+    }
+    if (this.is24Hours) {
+      this._pattern = new RegExp("^([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2})$");
+    }
+    if (changes.value != undefined && changes.value.currentValue != this._value) {
+      if (changes.value.currentValue == undefined || changes.value.currentValue == null || !this._pattern.test(changes.value.currentValue)) {
+        this._value = null;
+        this.value = null;
+        this.valueChange.emit(this.value);
+        if (this.onChange != undefined) {
+          this.onChange.emit(this.value);
+        }
+        return;
+      }
+      this._value = changes.value.currentValue;
+      this._extractValues();
+      if (this.onChange != undefined && !changes.value.firstChange) {
+        this.onChange.emit(this._value);
+      }
     }
   }
 

@@ -3,21 +3,22 @@
 <img src="https://raw.githubusercontent.com/NilavPatel/np-ui-data-grid-package/master/src/assets/images/logo-large.png" width="300" height="80">
 
 ````
-Angular 8 time-picker component
+Time picker for Angular 8 and 8+
 ````
 
 ## [Demo](https://stackblitz.com/edit/np-ui-time-picker)
 
+## NPM
 ````
 npm i np-ui-time-picker
 ````
 
-### HTML
+## HTML
 ````
-<np-time-picker [(value)]="timePicker"></np-time-picker>
+<np-ui-time-picker [(value)]="timePicker"></np-ui-time-picker>
 ````
 
-### Properties
+## Properties
 ````
 1.  value : string
     Two way data binding    
@@ -33,10 +34,14 @@ npm i np-ui-time-picker
 
 4.  is24Hours: boolean
     if set to true, display 24 hours format for time.
-    default value is false.    
+    default value is false.  
+
+5.  isOkButton : boolean
+    If set to true then Ok button will be visible, and color picker will be only closed on click of Ok button. 
+    It's default value is false.  
 ````
 
-### Apis
+## Apis
 ````
 1.  get24hrsTimeFormat()
     return 24 hrs formatted time value
@@ -45,7 +50,7 @@ npm i np-ui-time-picker
     return 12 hrs formatted time value
 ````
 
-### Methods
+## Methods
 ````
 1.  onChange( newValue : string)
     value change event, fired when time value is changed.

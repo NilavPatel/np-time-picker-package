@@ -20,11 +20,11 @@
       "dom"
     ],
     "paths": {
-      "np-time-picker": [
-        "dist/np-time-picker"
+      "np-ui-time-picker": [
+        "dist/np-ui-time-picker"
       ],
-      "np-time-picker/*": [
-        "dist/np-time-picker/*"
+      "np-ui-time-picker/*": [
+        "dist/np-ui-time-picker/*"
       ]
     }
   }
