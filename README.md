@@ -56,3 +56,9 @@ npm i np-ui-time-picker
     value change event, fired when time value is changed.
     in parameter new value will be parsed.
 ````
+
+## All np-ui packages for Angular
+1. [Data grid](https://www.npmjs.com/package/np-ui-data-grid)
+2. [Date picker](https://www.npmjs.com/package/np-ui-date-picker)
+3. [Time picker](https://www.npmjs.com/package/np-ui-time-picker)
+4. [Color picker](https://www.npmjs.com/package/np-ui-color-picker)
