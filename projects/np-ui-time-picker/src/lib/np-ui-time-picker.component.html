@@ -1,6 +1,6 @@
 <div class="np-component-main">
     <div class="np-input-group" *ngIf="!defaultOpen">
-        <input class="np-component-input" type="text" [(ngModel)]="_value" (click)="_toggleTimePicker()"
+        <input class="np-component-input" type="text" placeholder="{{placeholder}}" [(ngModel)]="_value" (click)="_toggleTimePicker()"
             (change)="_onInputChange()" [pattern]="_pattern" [disabled]="disabled">
         <button type="button" class="np-component-button" (click)="_toggleTimePicker()" [disabled]="disabled">
             <i class="demo-icon icon-clock"></i>

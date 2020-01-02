@@ -39,6 +39,9 @@ npm i np-ui-time-picker
 
 6.  isNowButton : boolean
     Show/hide now button, on click of now button current time will be get selected.
+
+7.  placeholder : string
+    add placeholder to input box
 ````
 
 ## Apis

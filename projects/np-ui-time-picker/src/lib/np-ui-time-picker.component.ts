@@ -26,6 +26,7 @@ export class NpUiTimePickerComponent implements OnInit {
   @Input() is24Hours: boolean;
   @Input() isOkButton: boolean;
   @Input() isNowButton: boolean;
+  @Input() placeholder: string;
 
   constructor(private elRef: ElementRef) {
   }
