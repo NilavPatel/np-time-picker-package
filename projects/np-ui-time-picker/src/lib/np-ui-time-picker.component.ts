@@ -25,6 +25,7 @@ export class NpUiTimePickerComponent implements OnInit {
   @Input() disabled: boolean;
   @Input() is24Hours: boolean;
   @Input() isOkButton: boolean;
+  @Input() isNowButton: boolean;
 
   constructor(private elRef: ElementRef) {
   }
@@ -257,6 +258,20 @@ export class NpUiTimePickerComponent implements OnInit {
     if (isChanged) {
       this._setValue();
     }
+  }
+
+  _selectNowTime() {
+    var today = new Date();
+    var nowTime = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    if (!this.is24Hours) {
+      nowTime = this.timeConvert24to12(nowTime);
+    }
+    this._value = nowTime;
+    this._extractValues();
+    if (this.onChange != undefined) {
+      this.onChange.emit(this._value);
+    }
+    this._isOpen = false;
   }
 
   get24hrsTimeFormat() {
