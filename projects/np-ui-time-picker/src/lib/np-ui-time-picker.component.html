@@ -1,20 +1,28 @@
-<div class="np-component-main">
-    <div class="np-input-group" *ngIf="!defaultOpen">
-        <input class="np-component-input" type="text" placeholder="{{placeholder}}" [(ngModel)]="_value" (click)="_toggleTimePicker()"
-            (change)="_onInputChange()" [pattern]="_pattern" [disabled]="disabled">
-        <button type="button" class="np-component-button" (click)="_toggleTimePicker()" [disabled]="disabled">
-            <i class="demo-icon icon-clock"></i>
-        </button>
+<div class="np-component">
+    <div class="np-input" *ngIf="!defaultOpen">
+        <input class="np-input-text" type="text" placeholder="{{placeholder}}" [(ngModel)]="_value" (click)="_toggleTimePicker()" (change)="_onInputChange()" [pattern]="_pattern" [disabled]="disabled">
+        <a class="np-icon-button" (click)="_toggleTimePicker()">
+            <svg class="np-icon" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/><path d="M0 0h24v24H0z" fill="none"/><path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+        </a>
     </div>
-    <div class="np-component-div" *ngIf="_isOpen || defaultOpen" [ngClass]="{'np-open-component' : defaultOpen}">
+    <div class="np-overlay" *ngIf="_isOpen || defaultOpen" [ngClass]="{'np-overlay-open' : defaultOpen}">
         <table>
             <tr>
-                <td><button class="np-ui-button" type="button" (click)="_minusHour()"><i
-                            class="demo-icon icon-up"></i></button></td>
-                <td><button class="np-ui-button" type="button" (click)="_minusMinute()"><i
-                            class="demo-icon icon-up"></i></button></td>
-                <td><button class="np-ui-button" type="button" (click)="_minusSecond()"><i
-                            class="demo-icon icon-up"></i></button></td>
+                <td>
+                    <a class="np-icon-button-lg" (click)="_minusHour()">
+                        <svg class="np-icon-lg" viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
+                    </a>
+                </td>
+                <td>
+                    <a class="np-icon-button-lg" (click)="_minusMinute()">
+                        <svg class="np-icon-lg" viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
+                    </a>
+                </td>
+                <td>
+                    <a class="np-icon-button-lg" (click)="_minusSecond()">
+                        <svg class="np-icon-lg" viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
+                    </a>
+                </td>
             </tr>
             <tr>
                 <td>
@@ -45,18 +53,27 @@
                 </td>
             </tr>
             <tr>
-                <td><button class="np-ui-button" type="button" (click)="_addHour()"><i
-                            class="demo-icon icon-down"></i></button></td>
-                <td><button class="np-ui-button" type="button" (click)="_addMinute()"><i
-                            class="demo-icon icon-down"></i></button></td>
-                <td><button class="np-ui-button" type="button" (click)="_addSecond()"><i
-                            class="demo-icon icon-down"></i></button></td>
+                <td>
+                    <a class="np-icon-button-lg" (click)="_addHour()">
+                        <svg class="np-icon-lg" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/><path fill="none" d="M0 0h24v24H0V0z"/></svg>
+                    </a>
+                </td>
+                <td>
+                    <a class="np-icon-button-lg" (click)="_addMinute()">
+                        <svg class="np-icon-lg" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/><path fill="none" d="M0 0h24v24H0V0z"/></svg>
+                    </a>
+                </td>
+                <td>
+                    <a class="np-icon-button-lg" (click)="_addSecond()">
+                        <svg class="np-icon-lg" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/><path fill="none" d="M0 0h24v24H0V0z"/></svg>
+                    </a>
+                </td>
                 <td></td>
             </tr>
         </table>
         <div *ngIf="isOkButton || isNowButton">
-            <button type="button" class="np-ok-button" (click)="_selectNowTime()" *ngIf="isNowButton">Now</button>
-            <button type="button" class="np-ok-button" (click)="_isOpen = !_isOpen" *ngIf="isOkButton">Ok</button>
+            <a class="np-button" (click)="_isOpen = !_isOpen" *ngIf="isOkButton">Ok</a>
+            <a class="np-button" (click)="_selectNowTime()" *ngIf="isNowButton">Now</a>
         </div>
     </div>
 </div>

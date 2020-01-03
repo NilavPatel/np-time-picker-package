@@ -193,7 +193,7 @@ export class NpUiTimePickerComponent implements OnInit {
   }
 
   _toggleTimePicker() {
-    if (this.defaultOpen) {
+    if (this.defaultOpen || this.disabled) {
       return;
     }
     this._isOpen = !this._isOpen;
