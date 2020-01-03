@@ -34,7 +34,7 @@ npm i np-ui-time-picker
     default value is false.  
 
 5.  isOkButton : boolean
-    If set to true then Ok button will be visible, and color picker will be only closed on click of Ok button. 
+    If set to true then Ok button will be visible, and time picker will be only closed on click of Ok button. 
     It's default value is false.
 
 6.  isNowButton : boolean
