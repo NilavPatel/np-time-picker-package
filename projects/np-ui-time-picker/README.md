@@ -40,6 +40,9 @@ npm i np-ui-time-picker
 
 7.  placeholder : string
     add placeholder to input box
+
+8.  hideSeconds : boolean
+    hide seconds dropdown from popup. also add/minus seconds button will be hide.
 ````
 
 ## Apis

@@ -27,6 +27,7 @@ export class NpUiTimePickerComponent implements OnInit {
   @Input() isOkButton: boolean;
   @Input() isNowButton: boolean;
   @Input() placeholder: string;
+  @Input() hideSeconds: boolean;
 
   constructor(private elRef: ElementRef) {
   }
@@ -44,6 +45,10 @@ export class NpUiTimePickerComponent implements OnInit {
     }
     if (this.is24Hours) {
       this._pattern = new RegExp("^([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2})$");
+    }
+
+    if (this.hideSeconds == undefined) {
+      this.hideSeconds = false;
     }
 
     var start = this.is24Hours == true ? 24 : 12;
@@ -157,9 +162,9 @@ export class NpUiTimePickerComponent implements OnInit {
 
   _setValue() {
     if (this.is24Hours) {
-      this._value = this._selectedHour + ":" + this._selectedMinute + ":" + this._selectedSecond;
+      this._value = this._selectedHour + ":" + this._selectedMinute + ":" + (this.hideSeconds ? 0 : this._selectedSecond);
     } else {
-      this._value = this._selectedHour + ":" + this._selectedMinute + ":" + this._selectedSecond + " " + this._selectedAMPM;
+      this._value = this._selectedHour + ":" + this._selectedMinute + ":" + (this.hideSeconds ? 0 : this._selectedSecond) + " " + this._selectedAMPM;
     }
     this.value = this._value;
     this.valueChange.emit(this._value);
@@ -263,7 +268,7 @@ export class NpUiTimePickerComponent implements OnInit {
 
   _selectNowTime() {
     var today = new Date();
-    var nowTime = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var nowTime = today.getHours() + ":" + today.getMinutes() + ":" + (this.hideSeconds ? 0 : today.getSeconds());
     if (!this.is24Hours) {
       nowTime = this.timeConvert24to12(nowTime);
     }

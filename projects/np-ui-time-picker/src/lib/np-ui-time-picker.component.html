@@ -13,16 +13,19 @@
                         <svg class="np-icon-lg" viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
                     </a>
                 </td>
+                <td></td>
                 <td>
                     <a class="np-icon-button-lg" (click)="_minusMinute()">
                         <svg class="np-icon-lg" viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
                     </a>
                 </td>
-                <td>
+                <td *ngIf="hideSeconds == false"></td>
+                <td *ngIf="hideSeconds == false">
                     <a class="np-icon-button-lg" (click)="_minusSecond()">
                         <svg class="np-icon-lg" viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/><path d="M0 0h24v24H0z" fill="none"/></svg>
                     </a>
                 </td>
+                <td></td>
             </tr>
             <tr>
                 <td>
@@ -31,6 +34,7 @@
                         </option>
                     </select>
                 </td>
+                <td>:</td>
                 <td>
                     <select (change)="_changeTime($event, 'minute')">
                         <option *ngFor="let minute of _minutes" value="{{minute}}"
@@ -38,7 +42,8 @@
                         </option>
                     </select>
                 </td>
-                <td>
+                <td *ngIf="hideSeconds == false">:</td>
+                <td *ngIf="hideSeconds == false">
                     <select (change)="_changeTime($event, 'second')">
                         <option *ngFor="let second of _seconds" value="{{second}}"
                             [selected]="second == _selectedSecond">{{second}}
@@ -58,12 +63,14 @@
                         <svg class="np-icon-lg" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/><path fill="none" d="M0 0h24v24H0V0z"/></svg>
                     </a>
                 </td>
+                <td></td>
                 <td>
                     <a class="np-icon-button-lg" (click)="_addMinute()">
                         <svg class="np-icon-lg" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/><path fill="none" d="M0 0h24v24H0V0z"/></svg>
                     </a>
                 </td>
-                <td>
+                <td *ngIf="hideSeconds == false"></td>
+                <td *ngIf="hideSeconds == false">
                     <a class="np-icon-button-lg" (click)="_addSecond()">
                         <svg class="np-icon-lg" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/><path fill="none" d="M0 0h24v24H0V0z"/></svg>
                     </a>

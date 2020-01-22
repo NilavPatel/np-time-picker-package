@@ -16,6 +16,7 @@ export class AppComponent {
   timePicker5: string;
   timePicker6: string;
   timePicker7: string;
+  timePicker8: string;
 
   setTime() {
     this.timePicker3 = "10:00:00 PM";
