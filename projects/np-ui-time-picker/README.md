@@ -43,6 +43,13 @@ npm i np-ui-time-picker
 
 8.  hideSeconds : boolean
     hide seconds dropdown from popup. also add/minus seconds button will be hide.
+
+9.  required : boolean
+    default value is false.
+    add required attribute to input textbox.
+
+10. name : string
+    add name attribute to input textbox.
 ````
 
 ## Apis

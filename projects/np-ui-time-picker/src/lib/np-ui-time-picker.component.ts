@@ -7,27 +7,35 @@ import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, HostList
 })
 export class NpUiTimePickerComponent implements OnInit {
 
-  _isOpen = false;
   _hours: number[] = [];
   _minutes: number[] = [];
   _seconds: number[] = [];
+  
+  _isOpen = false;
+
   _selectedHour: number = 0;
   _selectedMinute: number = 0;
   _selectedSecond: number = 0;
   _selectedAMPM = 'AM';
+  
   _value: string;
+  
   _pattern: any = new RegExp("^(([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}) ([AaPp][Mm]))$");
 
   @Input() value: string;
-  @Output() valueChange = new EventEmitter();
-  @Input() defaultOpen: boolean;
+  @Output() valueChange: EventEmitter<any> = new EventEmitter();
   @Output() onChange: EventEmitter<any> = new EventEmitter();
-  @Input() disabled: boolean;
-  @Input() is24Hours: boolean;
-  @Input() isOkButton: boolean;
-  @Input() isNowButton: boolean;
-  @Input() placeholder: string;
-  @Input() hideSeconds: boolean;
+
+  @Input() defaultOpen: boolean = false;
+  @Input() disabled: boolean = false;
+  @Input() is24Hours: boolean = false;
+  @Input() isOkButton: boolean = false;
+  @Input() isNowButton: boolean = false;
+  @Input() hideSeconds: boolean = false;
+
+  @Input() placeholder: string = "";
+  @Input() required: boolean = false;
+  @Input() name: string = "";
 
   constructor(private elRef: ElementRef) {
   }
