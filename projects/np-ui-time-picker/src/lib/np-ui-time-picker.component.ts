@@ -10,16 +10,16 @@ export class NpUiTimePickerComponent implements OnInit {
   _hours: number[] = [];
   _minutes: number[] = [];
   _seconds: number[] = [];
-  
+
   _isOpen = false;
 
   _selectedHour: number = 0;
   _selectedMinute: number = 0;
   _selectedSecond: number = 0;
   _selectedAMPM = 'AM';
-  
+
   _value: string;
-  
+
   _pattern: any = new RegExp("^(([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}) ([AaPp][Mm]))$");
 
   @Input() value: string;
@@ -82,14 +82,12 @@ export class NpUiTimePickerComponent implements OnInit {
         this._value = null;
         this.value = null;
         this.valueChange.emit(this.value);
-        if (this.onChange != undefined) {
-          this.onChange.emit(this.value);
-        }
+        this.onChange.emit(this.value);
         return;
       }
       this._value = changes.value.currentValue;
       this._extractValues();
-      if (this.onChange != undefined && !changes.value.firstChange) {
+      if (!changes.value.firstChange) {
         this.onChange.emit(this._value);
       }
     }
@@ -176,9 +174,7 @@ export class NpUiTimePickerComponent implements OnInit {
     }
     this.value = this._value;
     this.valueChange.emit(this._value);
-    if (this.onChange != undefined) {
-      this.onChange.emit(this._value);
-    }
+    this.onChange.emit(this._value);
   }
 
   private timeConvert12to24(time: string) {
@@ -224,17 +220,13 @@ export class NpUiTimePickerComponent implements OnInit {
       this._value = null;
       this.value = null;
       this.valueChange.emit(this.value);
-      if (this.onChange != undefined) {
-        this.onChange.emit(this.value);
-      }
+      this.onChange.emit(this.value);
       return;
     }
     this._extractValues();
     this.value = this._value;
     this.valueChange.emit(this._value);
-    if (this.onChange != undefined) {
-      this.onChange.emit(this._value);
-    }
+    this.onChange.emit(this._value);
   }
 
   _extractValues() {
@@ -282,9 +274,7 @@ export class NpUiTimePickerComponent implements OnInit {
     }
     this._value = nowTime;
     this._extractValues();
-    if (this.onChange != undefined) {
-      this.onChange.emit(this._value);
-    }
+    this.onChange.emit(this._value);
     this._isOpen = false;
   }
 
