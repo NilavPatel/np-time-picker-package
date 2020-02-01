@@ -60,6 +60,10 @@
     cursor: pointer;
 }
 
+.np-button:hover {
+    background-color: lightgray;
+}
+
 .np-button-group .np-button {
     margin: auto;
 }
