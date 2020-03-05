@@ -1,9 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, HostListener, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, HostListener, ElementRef, ViewEncapsulation, ChangeDetectionStrategy, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'np-ui-time-picker',
   templateUrl: 'np-ui-time-picker.component.html',
-  styleUrls: ['np-ui-time-picker.component.css']
+  styleUrls: ['np-ui-time-picker.component.css'],
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class NpUiTimePickerComponent implements OnInit {
 
@@ -36,6 +38,8 @@ export class NpUiTimePickerComponent implements OnInit {
   @Input() placeholder: string = "";
   @Input() required: boolean = false;
   @Input() name: string = "";
+
+  @ViewChild('timepickerinput') input: ElementRef;
 
   constructor(private elRef: ElementRef) {
   }
@@ -206,6 +210,9 @@ export class NpUiTimePickerComponent implements OnInit {
       return;
     }
     this._isOpen = !this._isOpen;
+    if (this._isOpen) {
+      this.input.nativeElement.focus();
+    }
   }
 
   _close() {

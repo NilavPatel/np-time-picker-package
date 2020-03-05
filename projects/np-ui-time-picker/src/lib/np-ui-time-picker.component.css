@@ -1,82 +1,87 @@
-.np-component {
+.np-componenet {
     position: relative;
-    display: inline-block;
-}
-
-.np-input-group {
-    display: inline-flex;
-    border: 1px solid black;
-    padding: 2px;
-}
-
-.np-input {
-    border: 1px solid transparent;
-}
-
-.np-input-group-append {
-    display: flex;
-    align-items: center;
-}
-
-.ng-invalid {
-    border: 1px solid red;
-}
-
-.np-overlay {
-    background-color: white;
-    position: absolute;
-    padding: 5px;
-    border: 1px solid black;
-    z-index: 9999;
-}
-
-.np-overlay-open {
-    position: relative;
-    z-index: auto;
+    width: 100%;
+    height: 100%;
 }
 
 .np-icon {
-    height: 18px;
-    width: 18px;
-    margin: auto;
+    height: 16px;
+    width: 16px;
+    padding: 1px;
 }
 
 .np-icon-lg {
     height: 24px;
     width: 24px;
+    padding: 1px;
+}
+
+.np-input {
+    padding-right: 20px;
+}
+
+.np-input-group-append {
+    display: inline-block;
+    right: 18px;
+    position: relative;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.np-overlay {
+    position: absolute;
+    background-color: white;
+    z-index: 1;
+    border: 1px solid black;
+    padding: 5px;
+    min-width: 200px;
+}
+
+.np-icon-close {
+    position: absolute;
+    right: 5px;
 }
 
 .np-button-icon {
     cursor: pointer;
 }
 
-.np-button-group {
-    display: flex;
-}
-
-.np-button {
-    padding: 5px;
-    border: 1px solid black;
-    cursor: pointer;
-}
-
-.np-button:hover {
-    background-color: lightgray;
-}
-
-.np-button-group .np-button {
-    margin: auto;
-}
-
-.np-select {
-    border: 1px solid black;
-    padding: 2px;
-}
-
-.text-align-center {
+.np-overlay table td {
     text-align: center;
 }
 
-.align-right {
-    float: right;
+.np-button {
+    border: 1px solid black;
+    padding: 2px;
+    margin-left: 5px;
+    display: inline-block;
+    cursor: pointer;
+    min-width: 50px;
+    text-align: center;
+}
+
+.np-overlay-timepicker-open {
+    position: relative;
+    width: 240px;
+    z-index: auto;
+}
+
+.ng-invalid.ng-touched {
+    border: 1px solid red;
+}
+
+.np-timepicker-select{
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.np-timepicker-select option {
+    width: 100%;
+    height: 20px;
+    margin: 0;
+    padding: 5px 10px;
+    text-align: left;
+    list-style: none;
+    cursor: pointer;
+    margin: 0;
 }

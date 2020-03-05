@@ -1,5 +1,5 @@
 # np-ui-time-picker
-Time picker custom component for Angular 8 and 8+, Created using only Angular.
+Time picker custom component for Angular 9 and 9+, Created using only Angular.
 
 ## Check demo [Here](https://stackblitz.com/edit/np-ui-time-picker)
 

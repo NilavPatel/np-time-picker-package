@@ -18,6 +18,8 @@ export class AppComponent {
   timePicker7: string;
   timePicker8: string;
 
+  isDisable: boolean = true;
+
   setTime() {
     this.timePicker3 = "10:00:00 PM";
   }
