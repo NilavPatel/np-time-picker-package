@@ -22,8 +22,7 @@ export class NpUiTimePickerComponent implements OnInit {
 
   _value: string;
 
-  _pattern: any = new RegExp("^(([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}) ([AaPp][Mm]))$");
-
+  _pattern: any;
   @Input() value: string;
   @Output() valueChange: EventEmitter<any> = new EventEmitter();
   @Output() onChange: EventEmitter<any> = new EventEmitter();
@@ -31,7 +30,7 @@ export class NpUiTimePickerComponent implements OnInit {
   @Input() defaultOpen: boolean = false;
   @Input() disabled: boolean = false;
   @Input() is24Hours: boolean = false;
-  @Input() isOkButton: boolean = false;
+  @Input() isOkButton: boolean = true;
   @Input() isNowButton: boolean = false;
   @Input() hideSeconds: boolean = false;
 
@@ -42,6 +41,14 @@ export class NpUiTimePickerComponent implements OnInit {
   @ViewChild('timepickerinput') input: ElementRef;
 
   constructor(private elRef: ElementRef) {
+    this._pattern = new RegExp("^(([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}) ([AaPp][Mm]))$");
+    for (var i = 0; i < 12; i++) {
+      this._hours.push(i);
+    }
+    for (var i = 0; i < 60; i++) {
+      this._minutes.push(i);
+      this._seconds.push(i);
+    }
   }
 
   @HostListener('document:click', ['$event'])
@@ -52,48 +59,32 @@ export class NpUiTimePickerComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.is24Hours == undefined) {
-      this.is24Hours = false;
-    }
-    if (this.is24Hours) {
-      this._pattern = new RegExp("^([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2})$");
-    }
-
-    if (this.hideSeconds == undefined) {
-      this.hideSeconds = false;
-    }
-
-    var start = this.is24Hours == true ? 24 : 12;
-    for (var i = 0; i < start; i++) {
-      this._hours.push(i);
-    }
-
-    for (var i = 0; i < 60; i++) {
-      this._minutes.push(i);
-      this._seconds.push(i);
-    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.is24Hours == undefined) {
-      this.is24Hours = false;
-    }
-    if (this.is24Hours) {
-      this._pattern = new RegExp("^([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2})$");
+    if (changes.is24Hours) {
+      this._hours = [];
+      if (changes.is24Hours.currentValue == true) {
+        this._pattern = new RegExp("^([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2})$");
+        for (var i = 0; i < 24; i++) {
+          this._hours.push(i);
+        }
+      } else {
+        this._pattern = new RegExp("^(([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}) ([AaPp][Mm]))$");
+        for (var i = 0; i < 12; i++) {
+          this._hours.push(i);
+        }
+      }
     }
     if (changes.value != undefined && changes.value.currentValue != this._value) {
       if (changes.value.currentValue == undefined || changes.value.currentValue == null || !this._pattern.test(changes.value.currentValue)) {
         this._value = null;
         this.value = null;
         this.valueChange.emit(this.value);
-        this.onChange.emit(this.value);
         return;
       }
       this._value = changes.value.currentValue;
       this._extractValues();
-      if (!changes.value.firstChange) {
-        this.onChange.emit(this._value);
-      }
     }
   }
 

@@ -28,7 +28,7 @@ Time picker custom component for Angular 9 and 9+, Created using only Angular.
     default value is false.  
 5.  `isOkButton` : boolean  
     If set to true then Ok button will be visible, and time picker will be only closed on click of Ok button.   
-    It's default value is false.  
+    It's default value is true.  
 6.  `isNowButton` : boolean  
     Show/hide now button, on click of now button current time will be get selected.  
 7.  `placeholder` : string  

@@ -7,24 +7,35 @@
 .np-icon {
     height: 16px;
     width: 16px;
-    padding: 1px;
 }
 
 .np-icon-lg {
     height: 24px;
     width: 24px;
-    padding: 1px;
+}
+
+.np-icon-button {
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.np-icon-button:hover {
+    background-color: lightblue;
 }
 
 .np-input {
-    padding-right: 20px;
+    width: 100%;
 }
 
-.np-input-group-append {
-    display: inline-block;
-    right: 18px;
-    position: relative;
-    vertical-align: middle;
+.np-input-group {
+    display: flex;
+}
+
+.np-input-timepicker-append {
     cursor: pointer;
     user-select: none;
 }
@@ -35,37 +46,42 @@
     z-index: 1;
     border: 1px solid black;
     padding: 5px;
-    min-width: 200px;
 }
 
 .np-icon-close {
     position: absolute;
-    right: 5px;
-}
-
-.np-button-icon {
+    right: 0px;
+    top: 0px;
     cursor: pointer;
     user-select: none;
 }
 
-.np-overlay table td {
-    text-align: center;
+.np-button-group {
+    padding: 5px;
+    text-align: end;
+}
+
+.np-button-group .np-button {
+    margin-left: 5px;
+    display: inline-flex;
 }
 
 .np-button {
-    border: 1px solid black;
-    padding: 2px;
-    margin-left: 5px;
-    display: inline-block;
-    cursor: pointer;
-    min-width: 50px;
+    padding: 5px;
     text-align: center;
+    cursor: pointer;
     user-select: none;
+    display: block;
+    border: 1px solid black;
+}
+
+.np-button:hover {
+    background-color: lightblue;
 }
 
 .np-overlay-timepicker-open {
     position: relative;
-    width: 240px;
+    width: 220px;
     z-index: auto;
 }
 
@@ -73,7 +89,7 @@
     border: 1px solid red;
 }
 
-.np-timepicker-select{
+.np-timepicker-select {
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -87,4 +103,20 @@
     list-style: none;
     cursor: pointer;
     margin: 0;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.np-ui-background {
+    background-color: aliceblue;
+}
+
+.np-timepicker-header {
+    font-style: italic;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
