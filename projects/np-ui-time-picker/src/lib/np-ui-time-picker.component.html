@@ -57,21 +57,21 @@
                 </tr>
                 <tr>
                     <td>
-                        <select class="np-timepicker-select" (change)="_changeTime($event, 'hour')" size="4">
+                        <select class="np-timepicker-select" title="Hour" (change)="_changeTime($event, 'hour')" size="4">
                             <option *ngFor="let hour of _hours" [value]="hour" [selected]="hour == _selectedHour">
                                 {{hour}}
                             </option>
                         </select>
                     </td>
                     <td>
-                        <select class="np-timepicker-select" (change)="_changeTime($event, 'minute')" size="4">
+                        <select class="np-timepicker-select" title="Minute" (change)="_changeTime($event, 'minute')" size="4">
                             <option *ngFor="let minute of _minutes" [value]="minute"
                                 [selected]="minute == _selectedMinute">{{minute}}
                             </option>
                         </select>
                     </td>
                     <td *ngIf="hideSeconds == false">
-                        <select class="np-timepicker-select" (change)="_changeTime($event, 'second')" size="4">
+                        <select class="np-timepicker-select" title="Second" (change)="_changeTime($event, 'second')" size="4">
                             <option *ngFor="let second of _seconds" [value]="second"
                                 [selected]="second == _selectedSecond">{{second}}
                             </option>
