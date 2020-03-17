@@ -26,18 +26,15 @@ Time picker custom component for Angular 9 and 9+, Created using only Angular.
 4.  `is24Hours`: boolean  
     if set to true, display 24 hours format for time.  
     default value is false.  
-5.  `isOkButton` : boolean  
-    If set to true then Ok button will be visible, and time picker will be only closed on click of Ok button.   
-    It's default value is true.  
-6.  `isNowButton` : boolean  
+5.  `showNowButton` : boolean  
     Show/hide now button, on click of now button current time will be get selected.  
-7.  `placeholder` : string  
+6.  `placeholder` : string  
     add placeholder to input box  
-8.  `hideSeconds` : boolean  
+7.  `hideSeconds` : boolean  
     hide seconds dropdown from popup. also add/minus seconds button will be hide.  
-9.  `required` : boolean  
+8.  `required` : boolean  
     default value is false. add required attribute to input textbox.  
-10. `name` : string  
+9.  `name` : string  
     add name attribute to input textbox.  
 
 ## Apis  

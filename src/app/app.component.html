@@ -21,7 +21,7 @@
 
 <div>
     <fieldset>
-        <legend>3. Set time to time picker</legend>
+        <legend>3. Set time in time picker</legend>
         <np-ui-time-picker [(value)]="timePicker3"></np-ui-time-picker>
         <button type="button" (click)="setTime()">Set 10:00:00 PM</button>
     </fieldset>
@@ -51,37 +51,30 @@
 
 <div>
     <fieldset>
-        <legend>7. Show ok button</legend>
-        <np-ui-time-picker [(value)]="timePicker7" [isOkButton]="true"></np-ui-time-picker>
+        <legend>7. Show Now button</legend>
+        <np-ui-time-picker [showNowButton]="true"></np-ui-time-picker>
+        <np-ui-time-picker [showNowButton]="true" [is24Hours]=true></np-ui-time-picker>
     </fieldset>
 </div>
 
 <div>
     <fieldset>
-        <legend>8. Show Now button</legend>
-        <np-ui-time-picker [isNowButton]="true" [isOkButton]="true"></np-ui-time-picker>
-        <np-ui-time-picker [isNowButton]="true" [isOkButton]="true" [is24Hours]=true></np-ui-time-picker>
-    </fieldset>
-</div>
-
-<div>
-    <fieldset>
-        <legend>9. Set placeholder to time picker</legend>
+        <legend>8. Set placeholder to time picker</legend>
         <np-ui-time-picker [placeholder]="'Select start time'"></np-ui-time-picker>
     </fieldset>
 </div>
 
 <div>
     <fieldset>
-        <legend>10. Hide seconds dropdown in time picker</legend>
-        <np-ui-time-picker [placeholder]="'Select start time'" [hideSeconds]=true [isNowButton]=true [(value)]="timePicker8"></np-ui-time-picker>
+        <legend>9. Hide seconds dropdown in time picker</legend>
+        <np-ui-time-picker [placeholder]="'Select start time'" [hideSeconds]=true [showNowButton]=true
+            [(value)]="timePicker8"></np-ui-time-picker>
     </fieldset>
 </div>
 
-
 <div>
     <fieldset>
-        <legend>11. Required validation</legend>
+        <legend>10. Required validation</legend>
         <np-ui-time-picker [required]="true" [name]="'txtTimePicker'"></np-ui-time-picker>
     </fieldset>
 </div>

@@ -14,13 +14,6 @@
     </div>
     <div class="np-overlay np-ui-background" *ngIf="_isOpen || defaultOpen"
         [ngClass]="{'np-overlay-timepicker-open' : defaultOpen}">
-        <a class="np-icon-close" *ngIf="!defaultOpen" (click)="_close()">
-            <svg class="np-icon" viewBox="0 0 24 24">
-                <path fill="currentcolor"
-                    d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
-                <path d="M0 0h24v24H0z" fill="none" />
-            </svg>
-        </a>
         <table>
             <tbody>
                 <tr>
@@ -57,21 +50,24 @@
                 </tr>
                 <tr>
                     <td>
-                        <select class="np-timepicker-select" title="Hour" (change)="_changeTime($event, 'hour')" size="4">
+                        <select class="np-timepicker-select" title="Hour" (change)="_changeTime($event, 'hour')"
+                            size="4">
                             <option *ngFor="let hour of _hours" [value]="hour" [selected]="hour == _selectedHour">
                                 {{hour}}
                             </option>
                         </select>
                     </td>
                     <td>
-                        <select class="np-timepicker-select" title="Minute" (change)="_changeTime($event, 'minute')" size="4">
+                        <select class="np-timepicker-select" title="Minute" (change)="_changeTime($event, 'minute')"
+                            size="4">
                             <option *ngFor="let minute of _minutes" [value]="minute"
                                 [selected]="minute == _selectedMinute">{{minute}}
                             </option>
                         </select>
                     </td>
                     <td *ngIf="hideSeconds == false">
-                        <select class="np-timepicker-select" title="Second" (change)="_changeTime($event, 'second')" size="4">
+                        <select class="np-timepicker-select" title="Second" (change)="_changeTime($event, 'second')"
+                            size="4">
                             <option *ngFor="let second of _seconds" [value]="second"
                                 [selected]="second == _selectedSecond">{{second}}
                             </option>
@@ -112,9 +108,10 @@
                 </tr>
             </tbody>
         </table>
-        <div *ngIf="isOkButton || isNowButton" class="np-button-group">
-            <a class="np-button" (click)="_selectNowTime()" *ngIf="isNowButton">Now</a>
-            <a class="np-button" (click)="_isOpen = !_isOpen" *ngIf="isOkButton">Ok</a>
+        <div class="np-button-group">
+            <a *ngIf="showNowButton" class="np-button" title="Now" (click)="_selectNowTime()">Now</a>
+            <a class="np-button" title="Clear" (click)="_clear()">Clear</a>
+            <a *ngIf="!defaultOpen" class="np-button" title="Ok" (click)="_isOpen = false">Ok</a>
         </div>
     </div>
 </div>

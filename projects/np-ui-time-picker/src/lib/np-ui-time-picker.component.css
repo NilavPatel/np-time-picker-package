@@ -48,14 +48,6 @@
     padding: 5px;
 }
 
-.np-icon-close {
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    cursor: pointer;
-    user-select: none;
-}
-
 .np-button-group {
     padding: 5px;
     text-align: end;

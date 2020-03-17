@@ -6,10 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  
+
   title = 'np-ui-time-picker-package';
 
-  timePicker: string ;
+  timePicker: string = "10:0:0 AM";
   timePicker2: string = "10:0:0";
   timePicker3: string;
   timePicker4: string;
