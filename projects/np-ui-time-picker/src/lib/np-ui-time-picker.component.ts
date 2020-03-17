@@ -1,13 +1,21 @@
-import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, HostListener, ElementRef, ViewEncapsulation, ChangeDetectionStrategy, ViewChild } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostListener, ElementRef, ViewEncapsulation, ChangeDetectionStrategy, ViewChild, forwardRef } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'np-ui-time-picker',
   templateUrl: 'np-ui-time-picker.component.html',
   styleUrls: ['np-ui-time-picker.component.css'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.Default
+  changeDetection: ChangeDetectionStrategy.Default,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => NpUiTimePickerComponent),
+      multi: true
+    }
+  ]
 })
-export class NpUiTimePickerComponent implements OnInit {
+export class NpUiTimePickerComponent implements ControlValueAccessor {
 
   _hours: number[] = [];
   _minutes: number[] = [];
@@ -15,29 +23,26 @@ export class NpUiTimePickerComponent implements OnInit {
 
   _isOpen = false;
 
-  _selectedHour: number = 0;
-  _selectedMinute: number = 0;
-  _selectedSecond: number = 0;
+  _selectedHour: number;
+  _selectedMinute: number;
+  _selectedSecond: number;
   _selectedAMPM = 'AM';
 
-  _value: string;
-
   _pattern: any;
-  @Input() value: string;
-  @Output() valueChange: EventEmitter<any> = new EventEmitter();
+  _innerValue: any = '';
+  _isDisabled: boolean = false;
+  private onChangeCallback: (_: any) => void;
+  private onTouchedCallback: () => void;
+
   @Output() onChange: EventEmitter<any> = new EventEmitter();
 
   @Input() defaultOpen: boolean = false;
-  @Input() disabled: boolean = false;
   @Input() is24Hours: boolean = false;
   @Input() showNowButton: boolean = false;
   @Input() hideSeconds: boolean = false;
-
   @Input() placeholder: string = "";
-  @Input() required: boolean = false;
-  @Input() name: string = "";
 
-  @ViewChild('timepickerinput') input: ElementRef;
+  @ViewChild('timepickerinput') _inputControl: ElementRef;
 
   constructor(private elRef: ElementRef) {
     this._pattern = new RegExp("^(([0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}) ([AaPp][Mm]))$");
@@ -57,10 +62,41 @@ export class NpUiTimePickerComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
+  get value(): any {
+    return this._innerValue;
+  };
+
+  set value(v: any) {
+    if (v !== this._innerValue) {
+      this._innerValue = v;
+      this.onChangeCallback(v);
+      this.onTouchedCallback();
+      if (this.onChange) {
+        this.onChange.emit(v);
+      }
+    }
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  writeValue(v: any): void {
+    if (v !== this._innerValue) {
+      this._innerValue = v;
+      this._extractValues();
+    }
+  }
+
+  registerOnChange(fn: any): void {
+    this.onChangeCallback = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouchedCallback = fn;
+  }
+
+  setDisabledState?(isDisabled: boolean): void {
+    this._isDisabled = isDisabled;
+  }
+
+  ngOnChanges(changes: any) {
     if (changes.is24Hours) {
       this._hours = [];
       if (changes.is24Hours.currentValue == true) {
@@ -74,16 +110,6 @@ export class NpUiTimePickerComponent implements OnInit {
           this._hours.push(i);
         }
       }
-    }
-    if (changes.value != undefined && changes.value.currentValue != this._value) {
-      if (changes.value.currentValue == undefined || changes.value.currentValue == null || !this._pattern.test(changes.value.currentValue)) {
-        this._value = null;
-        this.value = null;
-        this.valueChange.emit(this.value);
-        return;
-      }
-      this._value = changes.value.currentValue;
-      this._extractValues();
     }
   }
 
@@ -162,13 +188,10 @@ export class NpUiTimePickerComponent implements OnInit {
 
   _setValue() {
     if (this.is24Hours) {
-      this._value = this._selectedHour + ":" + this._selectedMinute + ":" + (this.hideSeconds ? 0 : this._selectedSecond);
+      this.value = (this._selectedHour ? this._selectedHour : 0) + ":" + (this._selectedMinute ? this._selectedMinute : 0) + ":" + (this.hideSeconds ? 0 : (this._selectedSecond ? this._selectedSecond : 0));
     } else {
-      this._value = this._selectedHour + ":" + this._selectedMinute + ":" + (this.hideSeconds ? 0 : this._selectedSecond) + " " + this._selectedAMPM;
+      this.value = (this._selectedHour ? this._selectedHour : 0) + ":" + (this._selectedMinute ? this._selectedMinute : 0) + ":" + (this.hideSeconds ? 0 : (this._selectedSecond ? this._selectedSecond : 0)) + " " + this._selectedAMPM;
     }
-    this.value = this._value;
-    this.valueChange.emit(this._value);
-    this.onChange.emit(this._value);
   }
 
   private timeConvert12to24(time: string) {
@@ -196,49 +219,52 @@ export class NpUiTimePickerComponent implements OnInit {
   }
 
   _toggleTimePicker() {
-    if (this.defaultOpen || this.disabled) {
-      return;
-    }
-    this._isOpen = !this._isOpen;
     if (this._isOpen) {
-      this.input.nativeElement.focus();
+      this._close();
+    } else {
+      this._open();
     }
   }
 
+  _open() {
+    if (this.defaultOpen == true || this._isDisabled) {
+      return;
+    }
+    this._inputControl.nativeElement.focus();
+    this._isOpen = true;
+    this.onTouchedCallback();
+  }
+
   _close() {
-    if (this.defaultOpen == true) {
+    if (this.defaultOpen == true || this._isDisabled) {
       return;
     }
     this._isOpen = false;
   }
 
   _onInputChange() {
-    if (this._value == undefined || this._value == null || !this._pattern.test(this._value)) {
-      this._value = null;
+    if (this.value == undefined || this.value == null || !this._pattern.test(this.value)) {
       this.value = null;
-      this.valueChange.emit(this.value);
-      this.onChange.emit(this.value);
+      this._clearSelectedValue();
       return;
     }
     this._extractValues();
-    this.value = this._value;
-    this.valueChange.emit(this._value);
-    this.onChange.emit(this._value);
   }
 
   _extractValues() {
-    if (this._value == undefined || this._value == null || !this._pattern.test(this._value)) {
+    if (this.value == undefined || this.value == null || !this._pattern.test(this.value)) {
+      this._clearSelectedValue();
       return;
     }
     if (this.is24Hours == true) {
-      var result24 = this.timeConvert12to24(this._value);
-      var timeArray = result24.split(":");
-      this._selectedHour = parseInt(timeArray[0]);
-      this._selectedMinute = parseInt(timeArray[1]);
-      this._selectedSecond = parseInt(timeArray[2]);
+      var result24 = this.timeConvert12to24(this.value);
+      var timeArray24 = result24.split(":");
+      this._selectedHour = parseInt(timeArray24[0]);
+      this._selectedMinute = parseInt(timeArray24[1]);
+      this._selectedSecond = parseInt(timeArray24[2]);
     } else {
-      var result = this._value.split(" ");
-      this._selectedAMPM = result[1] == "am" || result[1] == "AM" ? "AM" : "PM";
+      var result = this.value.split(" ");
+      this._selectedAMPM = result[1].toLowerCase() == "am" ? "AM" : "PM";
       var timeArray = result[0].split(":");
       this._selectedHour = parseInt(timeArray[0]);
       this._selectedMinute = parseInt(timeArray[1]);
@@ -269,9 +295,7 @@ export class NpUiTimePickerComponent implements OnInit {
     if (!this.is24Hours) {
       nowTime = this.timeConvert24to12(nowTime);
     }
-    this._value = nowTime;
-    this._extractValues();
-    this.onChange.emit(this._value);
+    this.value = nowTime;
     this._isOpen = false;
   }
 
@@ -290,13 +314,14 @@ export class NpUiTimePickerComponent implements OnInit {
   }
 
   _clear() {
-    this._value = null;
-    this._selectedHour = 0;
-    this._selectedMinute = 0;
-    this._selectedSecond = 0;
     this.value = null;
-    this.valueChange.emit(null);
-    this.onChange.emit(this._value);
+    this._clearSelectedValue();
     this._isOpen = false;
+  }
+
+  _clearSelectedValue() {
+    this._selectedHour = null;
+    this._selectedMinute = null;
+    this._selectedSecond = null;
   }
 }

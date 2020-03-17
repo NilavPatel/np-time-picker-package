@@ -1,7 +1,7 @@
 # np-ui-time-picker
-Time picker custom component for Angular 9 and 9+, Created using only Angular.
+Angular 9 Native time picker component.
 
-## Check demo [Here](https://stackblitz.com/edit/np-ui-time-picker)
+## Check demo [Here](https://stackblitz.com/edit/np-ui-time-picker9)
 
 ## NPM
 `$ npm install np-ui-time-picker`
@@ -9,33 +9,30 @@ Time picker custom component for Angular 9 and 9+, Created using only Angular.
 ## HTML
 ````html
 <np-ui-time-picker 
-    [(value)]="startTime"
-    (onChange)="onChangeStartTime($event)">
+    [(ngModel)]="startTime">
 </np-ui-time-picker>
 ````
 
 ## Properties
-1.  `value` : string  
+1.  `ngModel` : string  
     Two way data binding.  
     if 12 hrs format is set then returns value in **hh:mm:ss tt** format,  
     and if 24 hrs format is set then returns value in **HH:mm:ss** format.  
 2.  `disabled` : boolean  
     true/false - set component disabled  
-3.  `defaultOpen` : boolean  
+3.  `required` : boolean  
+    default value is false. add required attribute to input textbox.  
+4.  `defaultOpen` : boolean  
     Set time picker default open or close.  
-4.  `is24Hours`: boolean  
+5.  `is24Hours`: boolean  
     if set to true, display 24 hours format for time.  
     default value is false.  
-5.  `showNowButton` : boolean  
+6.  `showNowButton` : boolean  
     Show/hide now button, on click of now button current time will be get selected.  
-6.  `placeholder` : string  
+7.  `placeholder` : string  
     add placeholder to input box  
-7.  `hideSeconds` : boolean  
+8.  `hideSeconds` : boolean  
     hide seconds dropdown from popup. also add/minus seconds button will be hide.  
-8.  `required` : boolean  
-    default value is false. add required attribute to input textbox.  
-9.  `name` : string  
-    add name attribute to input textbox.  
 
 ## Apis  
 1.  `get24hrsTimeFormat()`  

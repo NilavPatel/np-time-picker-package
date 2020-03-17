@@ -1,8 +1,7 @@
-<div class="np-component">
+<div class="np-component" [ngClass]="{'np-component-default-open': defaultOpen}">
     <div class="np-input-group" *ngIf="!defaultOpen">
-        <input type="text" #timepickerinput class="np-input" [name]="name" [placeholder]="placeholder"
-            [pattern]="_pattern" [disabled]="disabled" [required]="required" [(ngModel)]="_value"
-            (click)="_toggleTimePicker()" (change)="_onInputChange()">
+        <input #timepickerinput class="np-input" [placeholder]="placeholder" [disabled]="_isDisabled"
+            [(ngModel)]="value" (focus)="_open()" (change)="_onInputChange()">
         <div class="np-input-timepicker-append" (click)="_toggleTimePicker()">
             <svg class="np-icon" viewBox="0 0 24 24">
                 <path fill="currentcolor"
