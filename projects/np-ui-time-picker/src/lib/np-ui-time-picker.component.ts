@@ -296,6 +296,7 @@ export class NpUiTimePickerComponent implements ControlValueAccessor {
       nowTime = this.timeConvert24to12(nowTime);
     }
     this.value = nowTime;
+    this._extractValues();
     this._isOpen = false;
   }
 
