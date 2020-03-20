@@ -23,7 +23,7 @@
 
 <div>
     <fieldset>
-        <legend>3. Set disable/enable</legend>
+        <legend>3. Disabled</legend>
         <np-ui-time-picker [(ngModel)]="timePicker3" disabled></np-ui-time-picker>
     </fieldset>
 </div>
@@ -32,7 +32,8 @@
     <form #form="ngForm">
         <fieldset>
             <legend>4. Required validation</legend>
-            <np-ui-time-picker [(ngModel)]="timePicker4" #validations="ngModel" required name="startTime"></np-ui-time-picker>
+            <np-ui-time-picker [(ngModel)]="timePicker4" #validations="ngModel" required name="startTime">
+            </np-ui-time-picker>
             <div *ngIf="validations.control.touched && validations.control.errors?.required" class="color-red">
                 Start time is required.
             </div>
@@ -44,7 +45,13 @@
 <div>
     <fieldset>
         <legend>5. Default open time picker</legend>
-        <np-ui-time-picker [(ngModel)]="timePicker5" [defaultOpen]="true"></np-ui-time-picker>
+        <np-ui-time-picker [(ngModel)]="timePicker5" [defaultOpen]="true" #validations5="ngModel"
+            [disabled]="timePicker5Disable" [required]="timePicker5Required"></np-ui-time-picker>
+        <div *ngIf="validations5.control.touched && validations5.control.errors?.required" class="color-red">
+            Time is required.
+        </div>
+        <button (click)="timePicker5Disable = !timePicker5Disable">Toggle Disable</button>
+        <button (click)="timePicker5Required = !timePicker5Required">Toggle Required</button>
     </fieldset>
 </div>
 
@@ -59,7 +66,8 @@
     <fieldset>
         <legend>7. Show Now button</legend>
         12 hrs:<np-ui-time-picker [(ngModel)]="timePicker71" [showNowButton]="true"></np-ui-time-picker>
-        24 hrs:<np-ui-time-picker [(ngModel)]="timePicker72" [showNowButton]="true" [is24Hours]=true></np-ui-time-picker>
+        24 hrs:<np-ui-time-picker [(ngModel)]="timePicker72" [showNowButton]="true" [is24Hours]=true>
+        </np-ui-time-picker>
     </fieldset>
 </div>
 
@@ -74,5 +82,12 @@
     <fieldset>
         <legend>9. Change event of time picker</legend>
         <np-ui-time-picker [(ngModel)]="timePicker9" (onChange)="onChange($event)"></np-ui-time-picker>
+    </fieldset>
+</div>
+
+<div>
+    <fieldset>
+        <legend>10. Style class</legend>
+        <np-ui-time-picker [(ngModel)]="timePicker10" [styleClass]="'myClass'"></np-ui-time-picker>
     </fieldset>
 </div>

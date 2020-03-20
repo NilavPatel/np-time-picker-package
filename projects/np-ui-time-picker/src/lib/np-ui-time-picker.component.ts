@@ -20,27 +20,25 @@ export class NpUiTimePickerComponent implements ControlValueAccessor {
   _hours: number[] = [];
   _minutes: number[] = [];
   _seconds: number[] = [];
-
   _isOpen = false;
-
   _selectedHour: number;
   _selectedMinute: number;
   _selectedSecond: number;
   _selectedAMPM = 'AM';
-
   _pattern: any;
-  _innerValue: any = '';
+  _innerValue: any;
   _isDisabled: boolean = false;
   private onChangeCallback: (_: any) => void;
   private onTouchedCallback: () => void;
-
-  @Output() onChange: EventEmitter<any> = new EventEmitter();
 
   @Input() defaultOpen: boolean = false;
   @Input() is24Hours: boolean = false;
   @Input() showNowButton: boolean = false;
   @Input() hideSeconds: boolean = false;
   @Input() placeholder: string = "";
+  @Input() styleClass: string;
+
+  @Output() onChange: EventEmitter<any> = new EventEmitter();
 
   @ViewChild('timepickerinput') _inputControl: ElementRef;
 
@@ -63,7 +61,7 @@ export class NpUiTimePickerComponent implements ControlValueAccessor {
   }
 
   get value(): any {
-    return this._innerValue;
+    return this._innerValue ? this._innerValue : null;
   };
 
   set value(v: any) {
@@ -236,19 +234,10 @@ export class NpUiTimePickerComponent implements ControlValueAccessor {
   }
 
   _close() {
-    if (this.defaultOpen == true || this._isDisabled) {
+    if (this.defaultOpen) {
       return;
     }
     this._isOpen = false;
-  }
-
-  _onInputChange() {
-    if (this.value == undefined || this.value == null || !this._pattern.test(this.value)) {
-      this.value = null;
-      this._clearSelectedValue();
-      return;
-    }
-    this._extractValues();
   }
 
   _extractValues() {
@@ -315,9 +304,12 @@ export class NpUiTimePickerComponent implements ControlValueAccessor {
   }
 
   _clear() {
+    if (this._isDisabled) {
+      return;
+    }
     this.value = null;
     this._clearSelectedValue();
-    this._isOpen = false;
+    this._close();
   }
 
   _clearSelectedValue() {

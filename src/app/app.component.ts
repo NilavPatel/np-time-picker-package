@@ -11,9 +11,11 @@ export class AppComponent {
 
   timePicker1: string = "10:0:0 AM";
   timePicker2: string = "10:0:0";
-  timePicker3: string;
+  timePicker3: string = "10:0:0 AM";
   timePicker4: string;
   timePicker5: string;
+  timePicker5Disable = false;
+  timePicker5Required = false;
   timePicker6: string;
   timePicker71: string;
   timePicker72: string;

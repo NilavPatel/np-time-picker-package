@@ -33,6 +33,8 @@ Angular 9 Native time picker component.
     add placeholder to input box  
 8.  `hideSeconds` : boolean  
     hide seconds dropdown from popup. also add/minus seconds button will be hide.  
+9. `styleClass` : string  
+    set name of css class.  
 
 ## Apis  
 1.  `get24hrsTimeFormat()`  
